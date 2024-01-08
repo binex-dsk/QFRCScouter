@@ -4,19 +4,25 @@
 #include <QWidget>
 
 namespace Ui {
-class Scouting;
+class AutoScouting;
 }
 
-class Scouting : public QWidget
+class AutoScouting : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Scouting(QWidget *parent = nullptr);
-    ~Scouting();
+    explicit AutoScouting(QWidget *parent = nullptr);
+    ~AutoScouting();
+
+    void clear();
+
+    int ampPieces();
+    int speakerPieces();
+    bool mobility();
 
 private:
-    Ui::Scouting *ui;
+    Ui::AutoScouting *ui;
 };
 
 #endif // AUTOSCOUTING_H

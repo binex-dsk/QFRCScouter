@@ -15,6 +15,8 @@ public:
     explicit TeamInfo(QWidget *parent = nullptr);
     ~TeamInfo();
 
+    int teamNumber();
+
 private:
     Ui::TeamInfo *ui;
 };

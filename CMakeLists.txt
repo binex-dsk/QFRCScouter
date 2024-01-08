@@ -10,8 +10,14 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Svg)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Svg)
+
+set(QRCODE_SOURCES
+        Qt-QrCodeGenerator/src/QrCodeGenerator.cpp
+        Qt-QrCodeGenerator/src/QrCodeGenerator.h
+        Qt-QrCodeGenerator/src/qrcodegen/qrcodegen.cpp
+        Qt-QrCodeGenerator/src/qrcodegen/qrcodegen.h)
 
 set(PROJECT_SOURCES
         src/main.cpp
@@ -39,7 +45,10 @@ set(PROJECT_SOURCES
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(adrnoid
         MANUAL_FINALIZATION
+        ${QRCODE_SOURCES}
         ${PROJECT_SOURCES}
+        include/TeleScouting.h src/TeleScouting.cpp ui/TeleScouting.ui
+        include/QRCode.h src/QRCode.cpp ui/QRCode.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET adrnoid APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -59,7 +68,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(adrnoid PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(adrnoid PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -83,13 +92,9 @@ install(TARGETS adrnoid
 )
 
 target_include_directories(adrnoid PRIVATE include/)
+target_include_directories(adrnoid PRIVATE Qt-QrCodeGenerator/src)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(adrnoid)
 
-target_sources(_qt_internal_apk_dependencies
-  PRIVATE
-
-
-)
 endif()

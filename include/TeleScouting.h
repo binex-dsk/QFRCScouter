@@ -1,0 +1,31 @@
+#ifndef TELESCOUTING_H
+#define TELESCOUTING_H
+
+#include <QWidget>
+
+namespace Ui {
+class TeleScouting;
+}
+
+class TeleScouting : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit TeleScouting(QWidget *parent = nullptr);
+    ~TeleScouting();
+
+    void clear();
+
+    int ampPieces();
+    int speakerPieces();
+    int droppedAmpPieces();
+    int droppedSpeakerPieces();
+    int trapPieces();
+    bool climb();
+
+private:
+    Ui::TeleScouting *ui;
+};
+
+#endif // TELESCOUTING_H

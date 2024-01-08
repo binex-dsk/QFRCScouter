@@ -13,6 +13,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QString serializeData();
+
 private:
     Ui::MainWindow *ui;
 };

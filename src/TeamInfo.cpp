@@ -12,3 +12,7 @@ TeamInfo::~TeamInfo()
 {
     delete ui;
 }
+
+int TeamInfo::teamNumber() {
+    return ui->spinBox->value();
+}
