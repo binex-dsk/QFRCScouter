@@ -74,6 +74,7 @@ jobs:
     - name: Install Qt 6.6.0
       uses: jurplel/install-qt-action@v3.3.0
       with:
+        cache: on
         version: 6.6.0
         aqtversion: ==3.1.*
 
@@ -81,6 +82,7 @@ jobs:
       if: matrix.qt_arch == 'wasm_singlethread'
       uses: jurplel/install-qt-action@v3.3.0
       with:
+        cache: on
         version: 6.6.0
         aqtversion: ==3.1.*
         arch: ${{ matrix.qt_arch }}
@@ -89,6 +91,7 @@ jobs:
       if: matrix.qt_target == 'android'
       uses: jurplel/install-qt-action@v3.3.0
       with:
+        cache: on
         version: 6.6.0
         aqtversion: ==3.1.*
         target: ${{ matrix.qt_target }}
