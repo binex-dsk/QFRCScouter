@@ -45,12 +45,12 @@ jobs:
     - name: Install CMake
       uses: lukka/get-cmake@v3.28.1
 
-        #- name: 'Install Qt 6.6.0'
-        #if: runner.os == 'Linux'
-        #uses: jurplel/install-qt-action@v3.3.0
-        #with:
-        #version: 6.6.0
-        #modules: qtsvg qtwaylandcompositor
+    - name: 'Install Qt 6.6.0'
+      if: runner.os == 'Linux'
+      uses: jurplel/install-qt-action@v3.3.0
+      with:
+        version: 6.6.0
+        modules: qtwaylandcompositor
 
     - name: Prepare AppImage (Linux)
       if: runner.os == 'Linux'
@@ -62,7 +62,7 @@ jobs:
     - name: Configure CMake (Linux)
       if: runner.os == 'Linux'
       run: |
-        sudo apt-get install libstdc++-10-dev gcc-10 ninja-build ${{ matrix.qt_modules }}
+        sudo apt-get install libstdc++-10-dev gcc-10 ninja-build
         git submodule update --init --recursive
         cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10
 
