@@ -97,7 +97,7 @@ jobs:
         declare QTPATH="${{ github.workspace }}/../Qt/${{ matrix.qt_version }}"
 
         #        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10 -DQT_HOST_PATH="$QTPATH/gcc_64" -DQT_HOST_PATH_CMAKE_DIR="$QTPATH/${{ matrix.qt_arch }}/lib/cmake"
-        cmake -S . -B build_wasm -DCMAKE_TOOLCHAIN_FILE=$QTPATH/${{ matrix.qt_arch }}/lib/cmake/Qt6/qt.toolchain.cmake -DQT_HOST_PATH=$QTPATH/gcc_64 -DQT_HOST_PATH_CMAKE_DIR=$QTPATH/${{ matrix.qt_arch }}/lib/cmake -DCMAKE_PREFIX_PATH=$QTPATH/${{ matrix.qt_arch }}/lib/cmake
+        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_TOOLCHAIN_FILE=$QTPATH/${{ matrix.qt_arch }}/lib/cmake/Qt6/qt.toolchain.cmake -DQT_HOST_PATH=$QTPATH/gcc_64 -DQT_HOST_PATH_CMAKE_DIR=$QTPATH/${{ matrix.qt_arch }}/lib/cmake -DCMAKE_PREFIX_PATH=$QTPATH/${{ matrix.qt_arch }}/lib/cmake
         cmake --build ${{ env.BUILD_DIR }} --parallel $(nproc)
 
         ls ${{ env.BUILD_DIR }}
