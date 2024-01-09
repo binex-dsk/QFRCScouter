@@ -13,7 +13,6 @@ on:
         description: Type of build (Debug, Release, RelWithDebInfo, MinSizeRel)
         type: string
         default: Debug
-    secrets: inherit
       # SIGNING_KEY:
       #   description: Private keystore for signing APKs
       #   required: false
