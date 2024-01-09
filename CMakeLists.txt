@@ -43,22 +43,40 @@ set(PROJECT_SOURCES
 
         include/TeleScouting.h src/TeleScouting.cpp ui/TeleScouting.ui
         include/QRCode.h src/QRCode.cpp ui/QRCode.ui
+        include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
 )
+
+if(WIN32)
+    set(RCS_FILE ${CMAKE_CURRENT_BINARY_DIR}/program_info/QFRCScouter.rc)
+endif()
+
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+
+# Git
+include(GetGitRevisionDescription)
+git_get_exact_tag(Scouter_GIT_TAG)
+get_git_head_revision(Scouter_GIT_REFSPEC Scouter_GIT_COMMIT)
+
+message(STATUS "Git commit: ${Scouter_GIT_COMMIT}")
+message(STATUS "Git tag: ${Scouter_GIT_TAG}")
+message(STATUS "Git refspec: ${Scouter_GIT_REFSPEC}")
+
+string(REPLACE "-beta" "." Scouter_GIT_TAG_NUMERO ${Scouter_GIT_TAG})
+
+add_subdirectory(program_info)
 
 qt_add_executable(QFRCScouter
     MANUAL_FINALIZATION
+    ${RCS_FILE}
     ${QRCODE_SOURCES}
     ${PROJECT_SOURCES}
-    include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
-
-
 )
 
 target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
+# explicit, fieed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.QFRCScouter)
 endif()

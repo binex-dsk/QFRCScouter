@@ -1,0 +1,29 @@
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#include <windows.h>
+
+IDI_ICON1               ICON    DISCARDABLE     "QFRCScouter.ico"
+10255 RT_MANIFEST "QFRCScouter.manifest"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     @Scouter_GIT_TAG_NUMERO@
+FILEOS          VOS_NT_WINDOWS32
+FILETYPE        VFT_APP
+BEGIN
+        BLOCK "StringFileInfo"
+        BEGIN
+                BLOCK "000004b0"
+                BEGIN
+                        VALUE "CompanyName", "binex-dsk"
+                        VALUE "FileDescription", "QFRCScouter"
+                        VALUE "FileVersion", "@Scouter_GIT_TAG@"
+                        VALUE "ProductName", "QFRCScouter"
+                        VALUE "ProductVersion", "@Scouter_GIT_TAG@"
+                END
+        END
+        BLOCK "VarFileInfo"
+        BEGIN
+                VALUE "Translation", 0x0000, 0x04b0 // Unicode
+        END
+END

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=QFRCScouter
+Comment=Reliable, high-performance scouting app for FRC.
+Exec=QFRCScouter
+Icon=QFRCScouter
+Categories=Education;Utility
