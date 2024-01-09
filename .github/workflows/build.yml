@@ -121,6 +121,7 @@ jobs:
           then tar --owner root --group root -czf ../QFRCScouter.tar.gz *
         else
           mv ${{ env.BUILD_DIR }}/QFRCScouter.html ${{ env.BUILD_DIR }}/index.html
+          ls ${{ env.BUILD_DIR }}
           tar --owner root --group root -czf QFRCScouter-WASM.tar.gz ${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
         fi
 
