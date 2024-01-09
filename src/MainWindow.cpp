@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     int currentIdx = 0;
 
-    connect(nextButton, &QPushButton::released, this, [this, &currentIdx]() {
+    connect(nextButton, &QPushButton::released, this, [this, currentIdx]() mutable {
         int nextIdx = currentIdx + 1;
         if (nextIdx >= stackedWidget->count()) nextIdx = stackedWidget->count() - 1;
         currentIdx = nextIdx;
@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
         timer.invalidate();
     });
 
-    connect(backButton, &QPushButton::released, this, [this, &currentIdx]() {
+    connect(backButton, &QPushButton::released, this, [this, currentIdx]() mutable {
         int nextIdx = currentIdx - 1;
         if (nextIdx < 0) nextIdx = 0;
         currentIdx = nextIdx;
@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
         stackedWidget->setCurrentWidget(m_pages.at(nextIdx));
     });
 
-    connect(qrcode, &QRCode::backButtonPressed, this, [this, &currentIdx]() {
+    connect(qrcode, &QRCode::backButtonPressed, this, [this, currentIdx]() mutable {
         currentIdx = 0;
         stackedWidget->setCurrentWidget(welcome);
         teleScouting->clear();
