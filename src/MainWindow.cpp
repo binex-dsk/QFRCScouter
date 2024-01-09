@@ -1,5 +1,7 @@
 #include "MainWindow.h"
 
+#include <QElapsedTimer>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , Ui::MainWindow()
@@ -19,19 +21,21 @@ MainWindow::MainWindow(QWidget *parent)
         int nextIdx = currentIdx + 1;
         if (nextIdx >= stackedWidget->count()) nextIdx = stackedWidget->count() - 1;
         currentIdx = nextIdx;
-        qDebug() << currentIdx;
 
         stackedWidget->setCurrentWidget(m_pages.at(nextIdx));
-        if (nextIdx == 4) {
+        QElapsedTimer timer;
+        timer.start();
+        if (nextIdx == stackedWidget->count() - 1) {
             qrcode->setQRData(serializeData());
         }
+        qDebug() << timer.elapsed();
+        timer.invalidate();
     });
 
     connect(backButton, &QPushButton::released, this, [this, &currentIdx]() {
         int nextIdx = currentIdx - 1;
         if (nextIdx < 0) nextIdx = 0;
         currentIdx = nextIdx;
-        qDebug() << currentIdx;
 
         stackedWidget->setCurrentWidget(m_pages.at(nextIdx));
     });
