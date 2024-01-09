@@ -60,9 +60,6 @@ jobs:
       BUILD_DIR: "build"
       VERSION: "1.0.0"
       # stupid workaround because github actions sucks
-      SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
-      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-      ALIAS: ${{ secrets.ALIAS }}
 
     steps:
     - uses: actions/checkout@v3
@@ -164,13 +161,13 @@ jobs:
         # The directory to find your release to sign
         releaseDirectory: ${{ env.BUILD_DIR }}/android-build/build/outputs/apk/debug
         # The key used to sign your release in base64 encoded format
-        signingKeyBase64: ${{ env.SIGNING_KEY }}
+        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
         # The key alias
-        alias: ${{ env.ALIAS }}
+        alias: ${{ secrets.ALIAS }}
         # The password to the keystore
-        keyStorePassword: ${{ env.KEYSTORE_PASSWORD }}
+        keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
         # wee woo
-        keyPassword: ${{ env.KEYSTORE_PASSWORD }}
+        keyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
 
     - name: Package AppImage (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
