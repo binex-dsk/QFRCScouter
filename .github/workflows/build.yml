@@ -20,17 +20,17 @@ jobs:
           - os: ubuntu-20.04
             qt_host: linux
             qt_version: '6.6.0'
-            arch: gcc_64
+            qt_arch: gcc_64
 
           - os: ubuntu-20.04
             qt_host: linux
             qt_version: '6.6.0'
-            arch: wasm_singlethread
+            qt_arch: wasm_singlethread
 
           - os: windows-2022
             qt_host: windows
             qt_version: '6.6.0'
-            arch: win64_msvc2019_64
+            qt_arch: win64_msvc2019_64
 
     runs-on: ${{ matrix.os }}
 
@@ -52,7 +52,7 @@ jobs:
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-        echo ${{ runner.arch }}
+        echo ${{ runner.qt_arch }}
 
     - name: Install MSVC (Windows)
       if: runner.os == 'Windows'
@@ -65,10 +65,10 @@ jobs:
       uses: jurplel/install-qt-action@v3.3.0
       with:
         version: 6.6.0
-        arch: ${{ runner.arch }}
+        arch: ${{ runner.qt_arch }}
 
     - name: Prepare AppImage (Linux)
-      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
+      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
       run: |
         sudo apt-get install libstdc++-10-dev gcc-10 ninja-build
         wget "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
@@ -76,7 +76,7 @@ jobs:
         wget "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
 
     - name: Prepare Emscripten (Linux)
-      if: runner.os == 'Linux' && runner.arch == 'wasm_singlethread'
+      if: runner.os == 'Linux' && runner.qt_arch == 'wasm_singlethread'
       uses: mymindstorm/setup-emsdk@v13
       with:
         # Version to install
@@ -102,19 +102,19 @@ jobs:
         cmake --build ${{ env.BUILD_DIR }} --config ${{ inputs.build_type }} --parallel $(nproc)
 
     - name: Package (Linux)
-      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
+      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
       run: |
         cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_DIR }}/usr
 
         cd ${{ env.INSTALL_DIR }}
-        if [ "${{ runner.arch }}" == "" ]
+        if [ "${{ runner.qt_arch }}" == "" ]
           then tar --owner root --group root -czf ../QFRCScouter.tar.gz *
         else
           tar --owner root --group root -czf ../QFRCScouter-WASM.tar.gz usr/*
         fi
 
     - name: Package AppImage (Linux)
-      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
+      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
       shell: bash
       run: |
         sudo apt-get install libxcb-cursor-dev libxcb-cursor0
@@ -158,21 +158,21 @@ jobs:
 
 
     - name: Upload WASM (Linux)
-      if: runner.os == 'Linux' && runner.arch == 'wasm_singlethread'
+      if: runner.os == 'Linux' && runner.qt_arch == 'wasm_singlethread'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-WASM-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
         path: QFRCScouter-WASM.tar.gz
 
     - name: Upload portable tarball (Linux)
-      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
+      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
         path: QFRCScouter.tar.gz
 
     - name: Upload AppImage (Linux)
-      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
+      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
