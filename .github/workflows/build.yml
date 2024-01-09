@@ -146,7 +146,7 @@ jobs:
     - name: balls
       if: matrix.qt_target == 'android'
       run: |
-        base64 -d <<< ${{ secrets.SIGNING_KEY }}
+        base64 -d <<< "${{ secrets.SIGNING_KEY }}"
 
     - name: Sign APK (Android)
       if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Debug'
