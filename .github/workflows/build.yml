@@ -28,6 +28,12 @@ jobs:
 
           - os: ubuntu-20.04
             qt_host: linux
+            qt_target: android
+            qt_arch: android_arm64_v8a
+            qt_version: '6.6.0'
+
+          - os: ubuntu-20.04
+            qt_host: linux
             qt_version: '6.6.0'
             qt_arch: wasm_singlethread
 
@@ -79,6 +85,15 @@ jobs:
         aqtversion: ==3.1.*
         arch: ${{ matrix.qt_arch }}
 
+    - name: Install Qt (Android)
+      if: matrix.qt_target == 'android'
+      uses: jurplel/install-qt-action@v3.3.0
+      with:
+        version: 6.6.0
+        aqtversion: ==3.1.*
+        target: ${{ matrix.qt_target }}
+        arch: ${{ matrix.qt_arch }}
+
     - name: Prepare AppImage (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
       run: |
@@ -100,7 +115,7 @@ jobs:
         git submodule update --init --recursive
         declare QTPATH="${{ github.workspace }}/../Qt/${{ matrix.qt_version }}"
 
-        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_TOOLCHAIN_FILE=$QTPATH/${{ matrix.qt_arch }}/lib/cmake/Qt6/qt.toolchain.cmake -DQT_HOST_PATH=$QTPATH/gcc_64 -DQT_HOST_PATH_CMAKE_DIR=$QTPATH/${{ matrix.qt_arch }}/lib/cmake -DCMAKE_PREFIX_PATH=$QTPATH/${{ matrix.qt_arch }}/lib/cmake
+        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -DCMAKE_TOOLCHAIN_FILE=$QTPATH/${{ matrix.qt_arch }}/lib/cmake/Qt6/qt.toolchain.cmake -DQT_HOST_PATH=$QTPATH/gcc_64 -DQT_HOST_PATH_CMAKE_DIR=$QTPATH/${{ matrix.qt_arch }}/lib/cmake -DCMAKE_PREFIX_PATH=$QTPATH/${{ matrix.qt_arch }}/lib/cmake
         cmake --build ${{ env.BUILD_DIR }} --parallel $(nproc)
 
     - name: Configure and Build (Windows)
@@ -124,6 +139,23 @@ jobs:
       run: |
         mv ${{ env.BUILD_DIR }}/QFRCScouter.html ${{ env.BUILD_DIR }}/index.html
         tar --owner root --group root -czf QFRCScouter-WASM.tar.gz ${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
+
+    - name: Sign APK (Android)
+      if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Debug'
+      uses: Tlaster/android-sign@v1.2.2
+      with:
+        # The directory to find your release to sign
+        releaseDirectory: ${{ env.BUILD_DIR }}/android-build/build/outputs/apk/debug
+        # The key used to sign your release in base64 encoded format
+        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+        # The key alias
+        alias: ${{ secrets.ALIAS }}
+        # The password to the keystore
+        keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+        # The working directory for action, default to build
+        buildDirectory: ${{ env.BUILD_DIR }}
+        # The output directory for sign, default to build/signed
+        output: .
 
     - name: Package AppImage (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
