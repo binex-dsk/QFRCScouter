@@ -116,12 +116,12 @@ jobs:
       run: |
         cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_DIR }}/usr
 
-        cd ${{ env.INSTALL_DIR }}
         if [ "${{ matrix.qt_arch }}" == "gcc_64" ]
+          cd ${{ env.INSTALL_DIR }}
           then tar --owner root --group root -czf ../QFRCScouter.tar.gz *
         else
           mv ${{ env.BUILD_DIR }}/QFRCScouter.html ${{ env.BUILD_DIR }}/index.html
-          tar --owner root --group root -czf ../QFRCScouter-WASM.tar.gz ../${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
+          tar --owner root --group root -czf QFRCScouter-WASM.tar.gz ${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
         fi
 
     - name: Package AppImage (Linux)
