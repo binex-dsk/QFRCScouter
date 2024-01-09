@@ -148,6 +148,7 @@ jobs:
       run: |
         base64 -d <<< "${{ secrets.SIGNING_KEY }}" > key.jks
         ls -l key.jks
+        ls /usr/local/lib/android/sdk/build-tools
         /usr/local/lib/android/sdk/build-tools/*/apksigner sign --ks key.jks --ks-pass "pass:${{ secrets.KEYSTORE_PASSWORD }}" --ks-key-alias ${{ secrets.ALIAS }} ${{ env.BUILD_DIR }}/android-build/build/outputs/apk/debug/*.apk --out QFRCScouter.apk
 
 #    - name: Sign APK (Android)
