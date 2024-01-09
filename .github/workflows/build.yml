@@ -20,13 +20,24 @@ jobs:
           - os: ubuntu-20.04
             qt_host: linux
             qt_version: '6.6.0'
-            qt_modules: 'qt6-svg-dev qt6-wayland-dev'
+            arch: gcc_64
+
+          - os: ubuntu-20.04
+            qt_host: linux
+            qt_version: '6.6.0'
+            arch: wasm_singlethread
+
+          - os: windows-2022
+            qt_host: windows
+            qt_version: '6.6.0'
+            arch: win64_msvc2019_64
 
     runs-on: ${{ matrix.os }}
 
     env:
       INSTALL_DIR: "install"
       INSTALL_APPIMAGE_DIR: "install-appdir"
+      INSTALL_WIN_DIR: "install-win"
       BUILD_DIR: "build"
       VERSION: "1.0.0"
 
@@ -42,6 +53,10 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
+    - name: Install MSVC (Windows)
+      if: runner.os == 'Windows'
+      uses: ilammy/msvc-dev-cmd@v1
+
     - name: Install CMake
       uses: lukka/get-cmake@v3.28.1
 
@@ -50,36 +65,56 @@ jobs:
       uses: jurplel/install-qt-action@v3.3.0
       with:
         version: 6.6.0
-        modules: qtwaylandcompositor
+        arch: ${{ runner.arch }}
 
     - name: Prepare AppImage (Linux)
-      if: runner.os == 'Linux'
+      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
       run: |
+        sudo apt-get install libstdc++-10-dev gcc-10 ninja-build
         wget "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
         wget "https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage"
         wget "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
 
-    - name: Configure CMake (Linux)
+    - name: Prepare Emscripten (Linux)
+      if: runner.os == 'Linux' && runner.arch == 'wasm_singlethread'
+      uses: mymindstorm/setup-emsdk@v13
+      with:
+        # Version to install
+        version: 3.1.37
+        
+    - name: Configure and Build (Linux)
       if: runner.os == 'Linux'
       run: |
-        sudo apt-get install libstdc++-10-dev gcc-10 ninja-build
         git submodule update --init --recursive
-        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10
 
-    - name: Build
-      run: |
+        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10
         cmake --build ${{ env.BUILD_DIR }} --parallel $(nproc)
 
+    - name: Configure and Build (Windows)
+      if: runner.os == 'Windows'
+      run: |
+
+    - name: Build (Windows)
+      run: |
+        git submodule update --init --recursive
+        cmake -S . -B ${{ env.BUILD_DIR }} -G "Ninja" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
+
+        cmake --build ${{ env.BUILD_DIR }} --config ${{ inputs.build_type }} --parallel $(nproc)
+
     - name: Package (Linux)
-      if: runner.os == 'Linux'
+      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
       run: |
         cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_DIR }}/usr
 
         cd ${{ env.INSTALL_DIR }}
-        tar --owner root --group root -czf ../QFRCScouter.tar.gz *
+        if [ "${{ runner.arch }}" == "" ]
+          then tar --owner root --group root -czf ../QFRCScouter.tar.gz *
+        else
+          tar --owner root --group root -czf ../QFRCScouter-WASM.tar.gz usr/*
+        fi
 
     - name: Package AppImage (Linux)
-      if: runner.os == 'Linux'
+      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
       shell: bash
       run: |
         sudo apt-get install libxcb-cursor-dev libxcb-cursor0
@@ -100,78 +135,51 @@ jobs:
 
         ./linuxdeploy-x86_64.AppImage --appdir ${{ env.INSTALL_APPIMAGE_DIR }} --output appimage --plugin qt
 
+    - name: Package (Windows)
+      if: runner.os == 'Windows'
+      shell: cmd
+      run: |
+        mkdir ${{ env.INSTALL_WIN_DIR }}
+        set PATH=%PATH%;"${{ runner.workspace }}\Qt\6.6.0\msvc2019_64\bin"
+
+        windeployqt ${{ env.BUILD_DIR }}\QFRCScouter.exe --dir ${{ env.INSTALL_WIN_DIR }}
+        cp ${{ env.BUILD_DIR }}\QFRCScouter.exe ${{ env.INSTALL_WIN_DIR }}
+
+        if "${{ inputs.build_type }}" == "Debug" (
+          cp C:\Windows\System32\ucrtbased.dll ${{ env.INSTALL_WIN_DIR }}
+        ) else (
+          cp C:\Windows\System32\ucrtbase.dll ${{ env.INSTALL_WIN_DIR }}
+        )
+
+
+      ##
+      # UPLOAD BUILDS
+      ##
+
+        
+    - name: Upload WASM (Linux)
+      if: runner.os == 'Linux' && runner.arch == 'wasm_singlethread'
+      uses: actions/upload-artifact@v3
+      with:
+        name: QFRCScouter-WASM-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
+        path: QFRCScouter-WASM.tar.gz        
+
     - name: Upload portable tarball (Linux)
-      if: runner.os == 'Linux'
+      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
         path: QFRCScouter.tar.gz
 
     - name: Upload AppImage (Linux)
-      if: runner.os == 'Linux'
+      if: runner.os == 'Linux' && runner.arch == 'gcc_64'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
         path: QFRCScouter-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
 
-
-  build-windows:
-    name: "Build - Windows"
-    runs-on: windows-2022
-
-    env:
-      VERSION: "1.0.0"
-      BUILD_WIN_DIR: "winbuild"
-      INSTALL_WIN_DIR: "install-win"
-
-    steps:
-      - uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Install CMake
-        uses: lukka/get-cmake@v3.28.1
-
-      - name: Run sccache-cache
-        uses: mozilla-actions/sccache-action@v0.0.3
-
-      - name: 'Install Qt (Windows)'
-        uses: jurplel/install-qt-action@v3.3.0
-        with:
-          version: 6.6.0
-
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: 'Build (Windows)'
-        run: |
-          git submodule update --init --recursive
-          cmake -S . -B ${{ env.BUILD_WIN_DIR }} -G "Ninja" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
-
-          cmake --build ${{ env.BUILD_WIN_DIR }} --config ${{ inputs.build_type }} --parallel $(nproc)
-        env:
-          SCCACHE_GHA_ENABLED: "true"
-
-      - name: Package (Windows)
-        shell: cmd
-        run: |
-          mkdir ${{ env.INSTALL_WIN_DIR }}
-          set PATH=%PATH%;"${{ runner.workspace }}\Qt\6.6.0\msvc2019_64\bin"
-
-          windeployqt ${{ env.BUILD_WIN_DIR }}\QFRCScouter.exe --dir ${{ env.INSTALL_WIN_DIR }}
-          cp ${{ env.BUILD_WIN_DIR }}\QFRCScouter.exe ${{ env.INSTALL_WIN_DIR }}
-
-          if "${{ inputs.build_type }}" == "Debug" (
-            cp C:\Windows\System32\ucrtbased.dll ${{ env.INSTALL_WIN_DIR }}
-          ) else (
-            cp C:\Windows\System32\ucrtbase.dll ${{ env.INSTALL_WIN_DIR }}
-          )
-
-      ##
-      # UPLOAD BUILDS
-      ##
-
-      - name: Upload binary zip (Windows, portable)
-        uses: actions/upload-artifact@v3
-        with:
-          name: QFRCScouter-Windows-Portable-${{ env.VERSION }}-${{ inputs.build_type }}
-          path: ${{ env.INSTALL_WIN_DIR }}/**
+    - name: Upload portable zip (Windows)
+      uses: actions/upload-artifact@v3
+      with:
+        name: QFRCScouter-Windows-Portable-${{ env.VERSION }}-${{ inputs.build_type }}
+        path: ${{ env.INSTALL_WIN_DIR }}/**
