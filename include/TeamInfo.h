@@ -16,6 +16,8 @@ public:
     ~TeamInfo();
 
     int teamNumber();
+    int matchNumber();
+    QString eventCode();
 
 private:
     Ui::TeamInfo *ui;

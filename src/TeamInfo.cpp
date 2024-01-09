@@ -14,5 +14,13 @@ TeamInfo::~TeamInfo()
 }
 
 int TeamInfo::teamNumber() {
-    return ui->spinBox->value();
+    return ui->teamNumber->value();
+}
+
+int TeamInfo::matchNumber() {
+    return ui->matchNumber->value();
+}
+
+QString TeamInfo::eventCode() {
+    return ui->eventCode->text();
 }

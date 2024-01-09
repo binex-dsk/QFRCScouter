@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     int currentIdx;
 
-    connect(nextButton, &QPushButton::clicked, this, [this, &currentIdx]() {
+    connect(nextButton, &QPushButton::released, this, [this, &currentIdx]() {
         int nextIdx = currentIdx + 1;
         if (nextIdx >= stackedWidget->count()) nextIdx = stackedWidget->count() - 1;
         currentIdx = nextIdx;
@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
 
-    connect(backButton, &QPushButton::clicked, this, [this, &currentIdx]() {
+    connect(backButton, &QPushButton::released, this, [this, &currentIdx]() {
         int nextIdx = currentIdx - 1;
         if (nextIdx < 0) nextIdx = 0;
         currentIdx = nextIdx;
@@ -53,6 +53,8 @@ QString MainWindow::serializeData() {
     QStringList csv;
     csv << "Field,Value";
     csv << "Team Number," + QString::number(teamInfo->teamNumber());
+    csv << "Match Number," + QString::number(teamInfo->matchNumber());
+    csv << "Event Code," + teamInfo->eventCode();
     csv << "Auto Mobility," + QString::number(autoScouting->mobility());
     csv << "Auto Amp Pieces," + QString::number(autoScouting->ampPieces());
     csv << "Auto Speaker Pieces," + QString::number(autoScouting->speakerPieces());
