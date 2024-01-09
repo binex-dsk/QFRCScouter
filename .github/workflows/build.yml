@@ -117,8 +117,8 @@ jobs:
         cd ${{ env.INSTALL_DIR }}
         if [ "${{ matrix.qt_arch }}" == "gcc_64" ]
           then tar --owner root --group root -czf ../QFRCScouter.tar.gz *
-        else
-          tar --owner root --group root -czf ../QFRCScouter-WASM.tar.gz usr/*
+          #else
+          #tar --owner root --group root -czf ../QFRCScouter-WASM.tar.gz
         fi
 
     - name: Package AppImage (Linux)
@@ -169,7 +169,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-WASM-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
-        path: ${{ BUILD_DIR }}/*.{js,wasm,svg,html}
+        path: ${{ env.BUILD_DIR }}/*.{js,wasm,svg,html}
 
     - name: Upload portable tarball (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
