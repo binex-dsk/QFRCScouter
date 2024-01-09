@@ -142,7 +142,8 @@ jobs:
 
     - name: Sign APK (Android)
       if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Debug'
-      uses: Tlaster/android-sign@v1.2.2
+      uses: r0adkll/sign-android-release@v1
+      id: sign_apk
       with:
         # The directory to find your release to sign
         releaseDirectory: ${{ env.BUILD_DIR }}/android-build/build/outputs/apk/debug
@@ -152,6 +153,8 @@ jobs:
         alias: ${{ secrets.ALIAS }}
         # The password to the keystore
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+        # wee woo
+        keyPassword: ${{ secrets.KEY_PASSWORD }}
         # The working directory for action, default to build
         buildDirectory: ${{ env.BUILD_DIR }}
         # The output directory for sign, default to build/signed
@@ -223,7 +226,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-Android-APK-${{ env.VERSION }}-${{ inputs.build_type }}
-        path: ./*.apk
+        path: ${{steps.sign_app.outputs.signedReleaseFile}}
 
     - name: Upload portable tarball (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
