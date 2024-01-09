@@ -94,11 +94,9 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         git submodule update --init --recursive
-        declare QTPATH="${{ github.workspace }}/../Qt/${{ matrix.qt_version }}/${{ matrix.qt_arch }}"
-        echo $QTPATH
-        ls $QTPATH
+        declare QTPATH="${{ github.workspace }}/../Qt/${{ matrix.qt_version }}"
 
-        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10 -DQT_HOST_PATH="$QTPATH" -DQT_FORCE_FIND_TOOLS=ON
+        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10 -DQT_HOST_PATH="$QTPATH/gcc_64" -DQT_HOST_PATH_CMAKE_DIR="$QTPATH/${{ matrix.qt_arch }}/lib/cmake"
         cmake --build ${{ env.BUILD_DIR }} --parallel $(nproc)
 
     - name: Configure and Build (Windows)
