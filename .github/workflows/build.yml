@@ -52,7 +52,7 @@ jobs:
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-        echo ${{ runner.qt_arch }}
+        echo ${{ matrix.qt_arch }}
 
     - name: Install MSVC (Windows)
       if: runner.os == 'Windows'
@@ -65,10 +65,10 @@ jobs:
       uses: jurplel/install-qt-action@v3.3.0
       with:
         version: 6.6.0
-        arch: ${{ runner.qt_arch }}
+        arch: ${{ matrix.qt_arch }}
 
     - name: Prepare AppImage (Linux)
-      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
+      if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
       run: |
         sudo apt-get install libstdc++-10-dev gcc-10 ninja-build
         wget "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
@@ -76,7 +76,7 @@ jobs:
         wget "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
 
     - name: Prepare Emscripten (Linux)
-      if: runner.os == 'Linux' && runner.qt_arch == 'wasm_singlethread'
+      if: runner.os == 'Linux' && matrix.qt_arch == 'wasm_singlethread'
       uses: mymindstorm/setup-emsdk@v13
       with:
         # Version to install
@@ -87,14 +87,11 @@ jobs:
       run: |
         git submodule update --init --recursive
 
-        cmake -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10
+        "$HOME/${{ matrix.qt_version }}/${{ matrix.qt_arch }}/bin/qt-cmake" -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10
         cmake --build ${{ env.BUILD_DIR }} --parallel $(nproc)
 
     - name: Configure and Build (Windows)
       if: runner.os == 'Windows'
-      run: |
-
-    - name: Build (Windows)
       run: |
         git submodule update --init --recursive
         cmake -S . -B ${{ env.BUILD_DIR }} -G "Ninja" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
@@ -102,19 +99,19 @@ jobs:
         cmake --build ${{ env.BUILD_DIR }} --config ${{ inputs.build_type }} --parallel $(nproc)
 
     - name: Package (Linux)
-      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
+      if: runner.os == 'Linux'
       run: |
         cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_DIR }}/usr
 
         cd ${{ env.INSTALL_DIR }}
-        if [ "${{ runner.qt_arch }}" == "" ]
+        if [ "${{ matrix.qt_arch }}" == "gcc_64" ]
           then tar --owner root --group root -czf ../QFRCScouter.tar.gz *
         else
           tar --owner root --group root -czf ../QFRCScouter-WASM.tar.gz usr/*
         fi
 
     - name: Package AppImage (Linux)
-      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
+      if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
       shell: bash
       run: |
         sudo apt-get install libxcb-cursor-dev libxcb-cursor0
@@ -128,7 +125,7 @@ jobs:
 
         mkdir -p ${{ env.INSTALL_APPIMAGE_DIR }}/usr/plugins/iconengines
 
-        cp -r /home/runner/work/QFRCScouter/Qt/${{ runner.qt_version }}/gcc_64/plugins/iconengines/* ${{ env.INSTALL_APPIMAGE_DIR }}/usr/plugins/iconengines
+        cp -r /home/runner/work/QFRCScouter/Qt/${{ matrix.qt_version }}/gcc_64/plugins/iconengines/* ${{ env.INSTALL_APPIMAGE_DIR }}/usr/plugins/iconengines
 
         cp /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1 ${{ env.INSTALL_APPIMAGE_DIR }}/usr/lib/
         cp /usr/lib/x86_64-linux-gnu/libssl.so.1.1 ${{ env.INSTALL_APPIMAGE_DIR }}/usr/lib/
@@ -158,27 +155,28 @@ jobs:
 
 
     - name: Upload WASM (Linux)
-      if: runner.os == 'Linux' && runner.qt_arch == 'wasm_singlethread'
+      if: runner.os == 'Linux' && matrix.qt_arch == 'wasm_singlethread'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-WASM-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
         path: QFRCScouter-WASM.tar.gz
 
     - name: Upload portable tarball (Linux)
-      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
+      if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
         path: QFRCScouter.tar.gz
 
     - name: Upload AppImage (Linux)
-      if: runner.os == 'Linux' && runner.qt_arch == 'gcc_64'
+      if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
         path: QFRCScouter-${{ runner.os }}-${{ env.VERSION }}-${{ inputs.build_type }}-x86_64.AppImage
 
     - name: Upload portable zip (Windows)
+      if: runner.os == 'Windows'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-Windows-Portable-${{ env.VERSION }}-${{ inputs.build_type }}
