@@ -88,7 +88,7 @@ jobs:
       run: |
         git submodule update --init --recursive
 
-        "${{ GITHUB_WORKSPACE }}/../Qt/${{ matrix.qt_version }}/${{ matrix.qt_arch }}/bin/qt-cmake" -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10
+        "${{ github.workspace }}/../Qt/${{ matrix.qt_version }}/${{ matrix.qt_arch }}/bin/qt-cmake" -S . -B ${{ env.BUILD_DIR }} -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=${{ inputs.build_type }} -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=/usr/bin/g++-10
         cmake --build ${{ env.BUILD_DIR }} --parallel $(nproc)
 
     - name: Configure and Build (Windows)
