@@ -153,13 +153,6 @@ jobs:
         mv ${{ env.BUILD_DIR }}/QFRCScouter.html ${{ env.BUILD_DIR }}/index.html
         tar --owner root --group root -czf QFRCScouter-WASM.tar.gz ${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
 
-    - name: balls
-      if: matrix.qt_target == 'android'
-      run: |
-        base64 -d <<< "${{ secrets.SIGNING_KEY }}" > key.jks
-        ls -l key.jks
-        /usr/local/lib/android/sdk/build-tools/34.0.0/apksigner sign --ks key.jks --ks-pass "pass:${{ secrets.KEYSTORE_PASSWORD }}" --ks-key-alias ${{ secrets.ALIAS }} ${{ env.BUILD_DIR }}/android-build/build/outputs/apk/debug/*.apk --out QFRCScouter.apk
-
     - name: Sign APK (Android)
       if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Debug'
       uses: r0adkll/sign-android-release@v1
