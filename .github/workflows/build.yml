@@ -164,13 +164,13 @@ jobs:
         # The directory to find your release to sign
         releaseDirectory: ${{ env.BUILD_DIR }}/android-build/build/outputs/apk/debug
         # The key used to sign your release in base64 encoded format
-        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+        signingKeyBase64: ${{ env.SIGNING_KEY }}
         # The key alias
-        alias: ${{ secrets.ALIAS }}
+        alias: ${{ env.ALIAS }}
         # The password to the keystore
-        keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+        keyStorePassword: ${{ env.KEYSTORE_PASSWORD }}
         # wee woo
-        keyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+        keyPassword: ${{ env.KEYSTORE_PASSWORD }}
 
     - name: Package AppImage (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
