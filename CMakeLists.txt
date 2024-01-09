@@ -45,23 +45,14 @@ set(PROJECT_SOURCES
         include/QRCode.h src/QRCode.cpp ui/QRCode.ui
 )
 
-# if(ANDROID)
-#     add_subdirectory(qt-android-cmake)
-#     add_library(QFRCScouter SHARED
-#         ${QRCODE_SOURCES}
-#         ${PROJECT_SOURCES}
-#     )
-#     include(qt-android-cmake/AddQtAndroidApk.cmake)
-#     add_qt_android_apk(QFRCScouterApk QFRCScouter)
+qt_add_executable(QFRCScouter
+    MANUAL_FINALIZATION
+    ${QRCODE_SOURCES}
+    ${PROJECT_SOURCES}
+    include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
 
-    qt_add_executable(QFRCScouter
-        MANUAL_FINALIZATION
-        ${QRCODE_SOURCES}
-        ${PROJECT_SOURCES}
-        include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
-    )
-# endif()
 
+)
 
 target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
 

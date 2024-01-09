@@ -1,6 +1,3 @@
 [submodule "Qt-QrCodeGenerator"]
 	path = Qt-QrCodeGenerator
 	url = https://github.com/alex-spataru/Qt-QrCodeGenerator.git
-[submodule "qt-android-cmake"]
-	path = qt-android-cmake
-	url = https://github.com/LaurentGomila/qt-android-cmake.git

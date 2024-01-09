@@ -1,0 +1,58 @@
+name: Build Application and Make Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+
+  build_release:
+    name: Build Release
+    uses: ./.github/workflows/build.yml
+    with:
+      build_type: Release
+
+  create_release:
+    needs: build_release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'true'
+          path: 'QFRCScouter-source'
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+      - name: Grab and store version
+        run: |
+          tag_name=$(echo ${{ github.ref }} | grep -oE "[^/]+$")
+          echo "VERSION=$tag_name" >> $GITHUB_ENV
+      - name: Package artifacts properly
+        run: |
+          mv ${{ github.workspace }}/QFRCScouter-source QFRCScouter-${{ env.VERSION }}
+          ls *
+          mv QFRCScouter-Linux-Binary*/QFRCScouter.tar.gz QFRCScouter-Linux-Binary-${{ env.VERSION }}.tar.gz
+          mv QFRCScouter-*.AppImage/QFRCScouter-*.AppImage QFRCScouter-Linux-${{ env.VERSION }}-x86_64.AppImage
+          zip -r QFRCScouter-Windows-Portable-${{ env.VERSION }}.zip QFRCScouter-Windows-Portable*/* QFRCScouter-Windows-Portable-${{ env.VERSION }}.zip
+
+          tar -czf QFRCScouter-${{ env.VERSION }}.tar.gz QFRCScouter-${{ env.VERSION }}
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          name: QFRCScouter ${{ env.VERSION }}
+          draft: true
+          prerelease: false
+          files: |
+            QFRCScouter-Linux-Binary-${{ env.VERSION }}.tar.gz
+            QFRCScouter-Linux-${{ env.VERSION }}-x86_64.AppImage
+            QFRCScouter-Windows-Portable-${{ env.VERSION }}.zip
+            QFRCScouter-${{ env.VERSION }}.tar.gz
