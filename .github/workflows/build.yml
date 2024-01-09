@@ -52,6 +52,7 @@ jobs:
       shell: bash
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        echo ${{ runner.arch }}
 
     - name: Install MSVC (Windows)
       if: runner.os == 'Windows'
@@ -60,8 +61,7 @@ jobs:
     - name: Install CMake
       uses: lukka/get-cmake@v3.28.1
 
-    - name: 'Install Qt 6.6.0'
-      if: runner.os == 'Linux'
+    - name: Install Qt 6.6.0
       uses: jurplel/install-qt-action@v3.3.0
       with:
         version: 6.6.0
@@ -81,7 +81,7 @@ jobs:
       with:
         # Version to install
         version: 3.1.37
-        
+
     - name: Configure and Build (Linux)
       if: runner.os == 'Linux'
       run: |
@@ -128,7 +128,7 @@ jobs:
 
         mkdir -p ${{ env.INSTALL_APPIMAGE_DIR }}/usr/plugins/iconengines
 
-        cp -r /home/runner/work/QFRCScouter/Qt/${{ matrix.qt_version }}/gcc_64/plugins/iconengines/* ${{ env.INSTALL_APPIMAGE_DIR }}/usr/plugins/iconengines
+        cp -r /home/runner/work/QFRCScouter/Qt/${{ runner.qt_version }}/gcc_64/plugins/iconengines/* ${{ env.INSTALL_APPIMAGE_DIR }}/usr/plugins/iconengines
 
         cp /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1 ${{ env.INSTALL_APPIMAGE_DIR }}/usr/lib/
         cp /usr/lib/x86_64-linux-gnu/libssl.so.1.1 ${{ env.INSTALL_APPIMAGE_DIR }}/usr/lib/
@@ -156,13 +156,13 @@ jobs:
       # UPLOAD BUILDS
       ##
 
-        
+
     - name: Upload WASM (Linux)
       if: runner.os == 'Linux' && runner.arch == 'wasm_singlethread'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-WASM-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
-        path: QFRCScouter-WASM.tar.gz        
+        path: QFRCScouter-WASM.tar.gz
 
     - name: Upload portable tarball (Linux)
       if: runner.os == 'Linux' && runner.arch == 'gcc_64'
