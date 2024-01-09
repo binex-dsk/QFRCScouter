@@ -116,6 +116,7 @@ jobs:
       run: |
         cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_DIR }}/usr
 
+        echo ${{ matrix.qt_arch }}
         if [ "${{ matrix.qt_arch }}" == "gcc_64" ]
           cd ${{ env.INSTALL_DIR }}
           then tar --owner root --group root -czf ../QFRCScouter.tar.gz *
