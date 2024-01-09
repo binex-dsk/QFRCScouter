@@ -158,10 +158,6 @@ jobs:
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
         # wee woo
         keyPassword: ${{ secrets.KEY_PASSWORD }}
-        # The working directory for action, default to build
-        buildDirectory: ${{ env.BUILD_DIR }}
-        # The output directory for sign, default to build/signed
-        output: .
 
     - name: Package AppImage (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'

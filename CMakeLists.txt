@@ -50,6 +50,13 @@ if(WIN32)
     set(RCS_FILE ${CMAKE_CURRENT_BINARY_DIR}/program_info/QFRCScouter.rc)
 endif()
 
+if(ANDROID)
+    set(QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAK_CURRENT_SOURCE_DIR}/android)
+
+    set(ANDROID_GUI ON)
+    set(MANIFEST_FILE ${CMAKE_CURRENT_SOURCE_DIR}/android/AndroidManifest.xml)
+endif()
+
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 
 # Git
@@ -67,6 +74,7 @@ add_subdirectory(program_info)
 
 qt_add_executable(QFRCScouter
     MANUAL_FINALIZATION
+    ${MANIFEST_FILE}
     ${RCS_FILE}
     ${QRCODE_SOURCES}
     ${PROJECT_SOURCES}
