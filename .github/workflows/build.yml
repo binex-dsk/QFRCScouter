@@ -112,19 +112,18 @@ jobs:
         cmake --build ${{ env.BUILD_DIR }} --config ${{ inputs.build_type }} --parallel $(nproc)
 
     - name: Package (Linux)
-      if: runner.os == 'Linux'
+      if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
       run: |
         cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_DIR }}/usr
 
-        echo ${{ matrix.qt_arch }}
-        if [ "${{ matrix.qt_arch }}" == "gcc_64" ]
-          cd ${{ env.INSTALL_DIR }}
-          then tar --owner root --group root -czf ../QFRCScouter.tar.gz *
-        else
-          mv ${{ env.BUILD_DIR }}/QFRCScouter.html ${{ env.BUILD_DIR }}/index.html
-          ls ${{ env.BUILD_DIR }}
-          tar --owner root --group root -czf QFRCScouter-WASM.tar.gz ${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
-        fi
+        cd ${{ env.INSTALL_DIR }}
+        tar --owner root --group root -czf ../QFRCScouter.tar.gz *
+
+    - name: Package (WASM)
+      if: runner.os == 'Linux' && matrix.qt_arch == 'wasm_singlethread'
+      run: |
+        mv ${{ env.BUILD_DIR }}/QFRCScouter.html ${{ env.BUILD_DIR }}/index.html
+        tar --owner root --group root -czf QFRCScouter-WASM.tar.gz ${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
 
     - name: Package AppImage (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
