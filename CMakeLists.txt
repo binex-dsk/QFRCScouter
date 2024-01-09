@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(adrnoid VERSION 0.1 LANGUAGES CXX)
+project(QFRCScouter VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOUIC_SEARCH_PATHS "ui/")
 
 set(CMAKE_AUTOUIC ON)
@@ -10,7 +10,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Svg)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Svg)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Svg)
 
 set(QRCODE_SOURCES
@@ -40,43 +40,38 @@ set(PROJECT_SOURCES
         ui/WelcomePage.ui
         ui/TeamInfo.ui
         ui/AutoScouting.ui
+
+        include/TeleScouting.h src/TeleScouting.cpp ui/TeleScouting.ui
+        include/QRCode.h src/QRCode.cpp ui/QRCode.ui
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(adrnoid
+# if(ANDROID)
+#     add_subdirectory(qt-android-cmake)
+#     add_library(QFRCScouter SHARED
+#         ${QRCODE_SOURCES}
+#         ${PROJECT_SOURCES}
+#     )
+#     include(qt-android-cmake/AddQtAndroidApk.cmake)
+#     add_qt_android_apk(QFRCScouterApk QFRCScouter)
+
+    qt_add_executable(QFRCScouter
         MANUAL_FINALIZATION
         ${QRCODE_SOURCES}
         ${PROJECT_SOURCES}
-        include/TeleScouting.h src/TeleScouting.cpp ui/TeleScouting.ui
-        include/QRCode.h src/QRCode.cpp ui/QRCode.ui
+        include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
     )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET adrnoid APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(adrnoid SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(adrnoid
-            ${PROJECT_SOURCES}
-        )
-    endif()
-endif()
+# endif()
 
-target_link_libraries(adrnoid PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
+
+target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.adrnoid)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.QFRCScouter)
 endif()
-set_target_properties(adrnoid PROPERTIES
+set_target_properties(QFRCScouter PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -85,16 +80,16 @@ set_target_properties(adrnoid PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS adrnoid
+install(TARGETS QFRCScouter
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-target_include_directories(adrnoid PRIVATE include/)
-target_include_directories(adrnoid PRIVATE Qt-QrCodeGenerator/src)
+target_include_directories(QFRCScouter PRIVATE include/)
+target_include_directories(QFRCScouter PRIVATE Qt-QrCodeGenerator/src)
+
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(adrnoid)
-
+    qt_finalize_executable(QFRCScouter)
 endif()

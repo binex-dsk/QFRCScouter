@@ -15,15 +15,8 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="4">
-     <widget class="QPushButton" name="backButton">
-      <property name="text">
-       <string>Back</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer">
+    <item row="1" column="2">
+     <spacer name="horizontalSpacer_3">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -48,23 +41,21 @@
       </property>
      </spacer>
     </item>
-    <item row="0" column="0" colspan="5">
-     <widget class="QStackedWidget" name="stackedWidget">
+    <item row="1" column="4">
+     <widget class="QPushButton" name="backButton">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>1</horstretch>
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
         <verstretch>1</verstretch>
        </sizepolicy>
       </property>
-      <widget class="WelcomePage" name="welcome"/>
-      <widget class="QRCode" name="qrcode"/>
-      <widget class="TeamInfo" name="teamInfo"/>
-      <widget class="AutoScouting" name="autoScouting"/>
-      <widget class="TeleScouting" name="teleScouting"/>
+      <property name="text">
+       <string>Back</string>
+      </property>
      </widget>
     </item>
-    <item row="1" column="2">
-     <spacer name="horizontalSpacer_3">
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -78,9 +69,30 @@
     </item>
     <item row="1" column="3">
      <widget class="QPushButton" name="nextButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string>Next</string>
       </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="5">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>1</horstretch>
+        <verstretch>4</verstretch>
+       </sizepolicy>
+      </property>
+      <widget class="WelcomePage" name="welcome"/>
+      <widget class="QRCode" name="qrcode"/>
+      <widget class="TeamInfo" name="teamInfo"/>
+      <widget class="AutoScouting" name="autoScouting"/>
+      <widget class="TeleScouting" name="teleScouting"/>
      </widget>
     </item>
    </layout>
