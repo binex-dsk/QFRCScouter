@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
         qrcode
     };
 
-    int currentIdx;
+    int currentIdx = 0;
 
     connect(nextButton, &QPushButton::released, this, [this, &currentIdx]() {
         int nextIdx = currentIdx + 1;
