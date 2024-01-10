@@ -10,6 +10,11 @@ on:
         type: string
         default: Debug
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   build:
     strategy:
