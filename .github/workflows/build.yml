@@ -2,10 +2,6 @@
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
 name: CMake on multiple platforms
 
-permissions:
-  pages: write
-  id-token: write
-
 on:
   workflow_call:
     inputs:
@@ -13,6 +9,11 @@ on:
         description: Type of build (Debug, Release, RelWithDebInfo, MinSizeRel)
         type: string
         default: Debug
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -221,12 +222,19 @@ jobs:
         name: QFRCScouter-WASM-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
         path: QFRCScouter-WASM.tar.gz
 
-    - name: Upload APK (Linux)
-      if: runner.os == 'Linux' && matrix.qt_target == 'android'
+    - name: Upload Release APK (Linux)
+      if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Release'
       uses: actions/upload-artifact@v3
       with:
         name: QFRCScouter-Android-APK-${{ env.VERSION }}-${{ inputs.build_type }}
         path: ${{steps.sign_apk.outputs.signedReleaseFile}}
+
+    - name: Upload Debug APK (Linux)
+      if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Debug'
+      uses: actions/upload-artifact@v3
+      with:
+        name: QFRCScouter-Android-APK-${{ env.VERSION }}-${{ inputs.build_type }}
+        path: ${{ env.BUILD_DIR }}/android-build/build/outputs/apk/debug/android-build-debug.apk
 
     - name: Upload portable tarball (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
