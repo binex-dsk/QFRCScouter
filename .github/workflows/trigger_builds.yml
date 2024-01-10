@@ -24,3 +24,4 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       build_type: Debug
+    secrets: inherit
