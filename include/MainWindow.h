@@ -16,6 +16,6 @@ public:
     QString serializeData();
 
 private:
-    Ui::MainWindow *ui;
+    int currentIdx = 0;
 };
 #endif // MAINWINDOW_H
