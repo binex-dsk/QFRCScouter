@@ -42,7 +42,7 @@
      </spacer>
     </item>
     <item row="1" column="4">
-     <widget class="QPushButton" name="backButton">
+     <widget class="QPushButton" name="nextButton">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -50,7 +50,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Back</string>
+       <string>Next</string>
       </property>
      </widget>
     </item>
@@ -68,7 +68,7 @@
      </spacer>
     </item>
     <item row="1" column="3">
-     <widget class="QPushButton" name="nextButton">
+     <widget class="QPushButton" name="backButton">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -76,7 +76,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Next</string>
+       <string>Back</string>
       </property>
      </widget>
     </item>
@@ -89,6 +89,7 @@
        </sizepolicy>
       </property>
       <widget class="WelcomePage" name="welcome"/>
+      <widget class="Notes" name="notes"/>
       <widget class="QRCode" name="qrcode"/>
       <widget class="TeamInfo" name="teamInfo"/>
       <widget class="AutoScouting" name="autoScouting"/>
@@ -127,6 +128,12 @@
    <class>QRCode</class>
    <extends>QWidget</extends>
    <header>QRCode.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Notes</class>
+   <extends>QWidget</extends>
+   <header>Notes.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

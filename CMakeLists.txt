@@ -44,6 +44,7 @@ set(PROJECT_SOURCES
         include/TeleScouting.h src/TeleScouting.cpp ui/TeleScouting.ui
         include/QRCode.h src/QRCode.cpp ui/QRCode.ui
         include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
+        include/Notes.h src/Notes.cpp ui/Notes.ui
 )
 
 if(WIN32)

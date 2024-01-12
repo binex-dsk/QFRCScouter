@@ -19,6 +19,9 @@ void TeleScouting::clear() {
     ui->droppedAmpPieces->setValue(0);
     ui->droppedSpeakerPieces->setValue(0);
     ui->trapPieces->setValue(0);
+
+    ui->spotlights->setValue(0);
+    ui->defense->setChecked(false);
     ui->climb->setChecked(false);
 }
 
@@ -40,6 +43,14 @@ int TeleScouting::droppedSpeakerPieces() {
 
 int TeleScouting::trapPieces() {
     return ui->trapPieces->value();
+}
+
+int TeleScouting::spotlights() {
+    return ui->spotlights->value();
+}
+
+bool TeleScouting::defense() {
+    return ui->defense->isChecked();
 }
 
 bool TeleScouting::climb() {

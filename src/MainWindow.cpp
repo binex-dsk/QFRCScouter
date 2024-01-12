@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
         teamInfo,
         autoScouting,
         teleScouting,
+        notes,
         qrcode
     };
 
@@ -54,12 +55,19 @@ QString MainWindow::serializeData() {
     csv << "Auto Mobility," + QString::number(autoScouting->mobility());
     csv << "Auto Amp Pieces," + QString::number(autoScouting->ampPieces());
     csv << "Auto Speaker Pieces," + QString::number(autoScouting->speakerPieces());
+    csv << "Auto Missed Pieces," + QString::number(autoScouting->missedPieces());
+    csv << "Neutral Zone," + QString::number(autoScouting->neutralZone());
+    csv << "Auto Extra Piece Held," + QString::number(autoScouting->holding());
+    csv << "Auto Stopped," + QString::number(autoScouting->aStop());
     csv << "Tele Amp Pieces," + QString::number(teleScouting->ampPieces());
     csv << "Tele Speaker Pieces," + QString::number(teleScouting->speakerPieces());
     csv << "Tele Dropped Amp Pieces," + QString::number(teleScouting->droppedAmpPieces());
     csv << "Tele Dropped Speaker Pieces," + QString::number(teleScouting->droppedSpeakerPieces());
     csv << "Tele Trap Pieces," + QString::number(teleScouting->trapPieces());
+    csv << "Tele Spotlights," + QString::number(teleScouting->spotlights());
     csv << "Tele Climb," + QString::number(teleScouting->climb());
+    csv << "Played Defense," + QString::number(teleScouting->defense());
+    csv << "Notes," + notes->notes().replace('\n', "; ");
 
     return csv.join("\n");
 }

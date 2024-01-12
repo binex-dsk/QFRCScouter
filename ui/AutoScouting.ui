@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>411</height>
+    <height>715</height>
    </rect>
   </property>
   <property name="font">
    <font>
     <family>Noto Sans</family>
-    <pointsize>14</pointsize>
+    <pointsize>20</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -38,19 +38,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_4">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>20</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Mobility?</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QCheckBox" name="mobility">
      <property name="font">
       <font>
@@ -58,13 +45,16 @@
        <pointsize>20</pointsize>
       </font>
      </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
      <property name="styleSheet">
       <string notr="true">QCheckBox::indicator:unchecked { width: 30px; height: 30px; } QCheckBox::indicator:checked { width: 30px; height: 30px; }
 
 </string>
      </property>
      <property name="text">
-      <string/>
+      <string>Mobility?</string>
      </property>
     </widget>
    </item>
@@ -123,6 +113,98 @@
        <family>Noto Sans</family>
        <pointsize>20</pointsize>
       </font>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_7">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Missed Pieces</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="BetterSpinBox" name="missedPieces">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="holding">
+     <property name="font">
+      <font>
+       <family>Sans Serif</family>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QCheckBox::indicator:unchecked { width: 30px; height: 30px; } QCheckBox::indicator:checked { width: 30px; height: 30px; }
+
+</string>
+     </property>
+     <property name="text">
+      <string>Holding Piece at End?</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="neutral">
+     <property name="font">
+      <font>
+       <family>Sans Serif</family>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QCheckBox::indicator:unchecked { width: 30px; height: 30px; } QCheckBox::indicator:checked { width: 30px; height: 30px; }
+
+</string>
+     </property>
+     <property name="text">
+      <string>Went for Neutral Zone?</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="stopped">
+     <property name="font">
+      <font>
+       <family>Sans Serif</family>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QCheckBox::indicator:unchecked { width: 30px; height: 30px; } QCheckBox::indicator:checked { width: 30px; height: 30px; }
+
+</string>
+     </property>
+     <property name="text">
+      <string>A-Stopped?</string>
      </property>
     </widget>
    </item>

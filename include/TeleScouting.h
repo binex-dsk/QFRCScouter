@@ -22,6 +22,8 @@ public:
     int droppedAmpPieces();
     int droppedSpeakerPieces();
     int trapPieces();
+    int spotlights();
+    bool defense();
     bool climb();
 
 private:
