@@ -45,6 +45,12 @@ set(PROJECT_SOURCES
         include/QRCode.h src/QRCode.cpp ui/QRCode.ui
         include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
         include/Notes.h src/Notes.cpp ui/Notes.ui
+        include/SubjectiveScales.h src/SubjectiveScales.cpp ui/SubjectiveScales.ui
+
+        tba/Schedule.h tba/Schedule.cpp
+        tba/Match.h tba/Match.cpp
+
+        include/MatchData.h src/MatchData.cpp
 )
 
 if(WIN32)
@@ -79,6 +85,7 @@ qt_add_executable(QFRCScouter
     ${RCS_FILE}
     ${QRCODE_SOURCES}
     ${PROJECT_SOURCES}
+    Schedule.qrc
 )
 
 target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
@@ -105,6 +112,7 @@ install(TARGETS QFRCScouter
 )
 
 target_include_directories(QFRCScouter PRIVATE include/)
+target_include_directories(QFRCScouter PRIVATE tba/)
 target_include_directories(QFRCScouter PRIVATE Qt-QrCodeGenerator/src)
 
 

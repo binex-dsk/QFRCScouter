@@ -19,11 +19,9 @@ public:
 
     int ampPieces();
     int speakerPieces();
-    int missedPieces();
     bool mobility();
     bool neutralZone();
     bool aStop();
-    bool holding();
 
 private:
     Ui::AutoScouting *ui;
