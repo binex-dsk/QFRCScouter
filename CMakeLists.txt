@@ -116,8 +116,8 @@ target_include_directories(QFRCScouter PRIVATE tba/)
 target_include_directories(QFRCScouter PRIVATE Qt-QrCodeGenerator/src)
 
 if (EMSCRIPTEN)
-    target_compile_options(QFRCScouter PRIVATE "-sDISABLE_EXCEPTION_CATCHING=0")
-    target_link_options(QFRCScouter PRIVATE "-sDISABLE_EXCEPTION_CATCHING=0")
+    target_compile_options(QFRCScouter PRIVATE "-sNO_DISABLE_EXCEPTION_CATCHING")
+    target_link_options(QFRCScouter PRIVATE "-sNO_DISABLE_EXCEPTION_CATCHING")
 endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
