@@ -115,6 +115,7 @@ target_include_directories(QFRCScouter PRIVATE include/)
 target_include_directories(QFRCScouter PRIVATE tba/)
 target_include_directories(QFRCScouter PRIVATE Qt-QrCodeGenerator/src)
 
+target_link_options(QFRCScouter PRIVATE "-sDISABLE_EXCEPTION_CATCHING=0")
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(QFRCScouter)

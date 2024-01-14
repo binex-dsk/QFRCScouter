@@ -170,7 +170,7 @@
       <string notr="true">QCheckBox::indicator:unchecked { width: 30px; height: 30px; } QCheckBox::indicator:checked { width: 30px; height: 30px; }</string>
      </property>
      <property name="text">
-      <string>Played Defense? (notes on next page)</string>
+      <string>Played Defense?</string>
      </property>
      <property name="iconSize">
       <size>

@@ -1,6 +1,8 @@
 #include "TeamInfo.h"
 #include "ui_TeamInfo.h"
 
+#include <QKeyEvent>
+
 TeamInfo::TeamInfo(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::TeamInfo)
@@ -49,6 +51,7 @@ void TeamInfo::setTeam() {
     try {
         match = m_matchData.schedule().getMatch(matchNumber, level);
     } catch (std::exception &e) {
+        qDebug() << "Wah wah";
         return;
     }
 
@@ -74,6 +77,7 @@ void TeamInfo::setStation() {
     try {
         match = m_matchData.schedule().getMatch(matchNumber, level);
     } catch (std::exception &e) {
+        qDebug() << "Okay";
         return;
     }
 
@@ -81,4 +85,10 @@ void TeamInfo::setStation() {
 
     if (station == AllianceStation::Invalid) return;
     m_buttonMap.value(station)->setChecked(true);
+}
+
+void TeamInfo::keyPressEvent(QKeyEvent *event) {
+    if (event->key() == Qt::Key_Backspace) {
+        qDebug() << "nuhuh";
+    }
 }

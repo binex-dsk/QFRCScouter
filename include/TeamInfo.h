@@ -17,6 +17,8 @@ class TeamInfo : public QWidget
 private:
     MatchData m_matchData{};
 
+    void keyPressEvent(QKeyEvent *event);
+
 public:
     explicit TeamInfo(QWidget *parent = nullptr);
     ~TeamInfo();
