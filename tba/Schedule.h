@@ -17,7 +17,7 @@ public:
 
     QList<Match> matches();
 
-    Match getMatch(int matchNumber, CompLevel compLevel);
+    std::optional<Match> getMatch(int matchNumber, CompLevel compLevel);
 
     QList<int> matchesForLevel(CompLevel level);
 };

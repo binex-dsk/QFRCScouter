@@ -47,15 +47,14 @@ void TeamInfo::setTeam() {
         if (iter.value()->isChecked()) station = iter.key();
     }
 
-    Match match;
-    try {
-        match = m_matchData.schedule().getMatch(matchNumber, level);
-    } catch (std::exception &e) {
-        qDebug() << "Wah wah";
+    std::optional<Match> match;
+    match = m_matchData.schedule().getMatch(matchNumber, level);
+
+    if (match == std::nullopt) {
         return;
     }
 
-    QString team = match.teamForStation(station);
+    QString team = match.value().teamForStation(station);
 
     ui->teamNumber->setValue(team.toInt());
 }
@@ -73,15 +72,14 @@ void TeamInfo::setStation() {
     else if (ui->semis->isChecked()) level = CompLevel::Semifinals;
     else level = CompLevel::Quals;
 
-    Match match;
-    try {
-        match = m_matchData.schedule().getMatch(matchNumber, level);
-    } catch (std::exception &e) {
-        qDebug() << "Okay";
+    std::optional<Match> match;
+    match = m_matchData.schedule().getMatch(matchNumber, level);
+
+    if (match == std::nullopt) {
         return;
     }
 
-    AllianceStation station = match.stationForTeam(team);
+    AllianceStation station = match.value().stationForTeam(team);
 
     if (station == AllianceStation::Invalid) return;
     m_buttonMap.value(station)->setChecked(true);

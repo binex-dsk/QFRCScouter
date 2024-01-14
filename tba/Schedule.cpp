@@ -14,14 +14,14 @@ QList<Match> Schedule::matches() {
     return m_matches;
 }
 
-Match Schedule::getMatch(int matchNumber, CompLevel compLevel) {
+std::optional<Match> Schedule::getMatch(int matchNumber, CompLevel compLevel) {
     for (Match match : m_matches) {
         if (match.compLevel() == compLevel && match.matchNumber() == matchNumber) {
             return match;
         }
     }
 
-    throw std::runtime_error("Match does not exist.");
+    return std::nullopt;
 }
 
 QList<int> Schedule::matchesForLevel(CompLevel level) {
