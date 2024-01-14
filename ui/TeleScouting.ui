@@ -25,7 +25,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>40</pointsize>
+       <pointsize>32</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -48,7 +48,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -67,7 +67,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>16</pointsize>
       </font>
      </property>
     </widget>
@@ -77,7 +77,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -96,7 +96,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>16</pointsize>
       </font>
      </property>
     </widget>
@@ -106,7 +106,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -125,7 +125,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>16</pointsize>
       </font>
      </property>
     </widget>
@@ -135,7 +135,7 @@
      <property name="font">
       <font>
        <family>Sans Serif</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
@@ -160,7 +160,7 @@
      <property name="font">
       <font>
        <family>Sans Serif</family>
-       <pointsize>18</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
@@ -182,6 +182,12 @@
    </item>
    <item>
     <widget class="QCheckBox" name="defended">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="layoutDirection">
       <enum>Qt::RightToLeft</enum>
      </property>
@@ -201,13 +207,26 @@
    </item>
    <item>
     <widget class="QLabel" name="label_9">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Spotlights Hit</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="BetterSpinBox" name="spotlights"/>
+    <widget class="BetterSpinBox" name="spotlights">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
