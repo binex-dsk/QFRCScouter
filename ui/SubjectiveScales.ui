@@ -52,7 +52,26 @@
    <item row="4" column="1">
     <widget class="QSlider" name="speed">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">.QSlider {
+    min-height: 55px;
+    max-height: 55px;
+    background: #000000;
+}
+
+.QSlider::groove:horizontal {
+    border: 1px solid #262626;
+    height: 8px;
+    background: #393939;
+    margin: 0 12px;
+}
+
+.QSlider::handle:horizontal {
+    background: rgb(124, 18, 159);
+    border: 1px solid black;
+    width: 23px;
+    height: 100px;
+    margin: -24px -12px;
+}</string>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -69,7 +88,26 @@
    <item row="3" column="1">
     <widget class="QSlider" name="defense">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">.QSlider {
+    min-height: 55px;
+    max-height: 55px;
+    background: #000000;
+}
+
+.QSlider::groove:horizontal {
+    border: 1px solid #262626;
+    height: 8px;
+    background: #393939;
+    margin: 0 12px;
+}
+
+.QSlider::handle:horizontal {
+    background: rgb(124, 18, 159);
+    border: 1px solid black;
+    width: 23px;
+    height: 100px;
+    margin: -24px -12px;
+}</string>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -99,7 +137,26 @@
    <item row="5" column="1">
     <widget class="QSlider" name="tippiness">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">.QSlider {
+    min-height: 55px;
+    max-height: 55px;
+    background: #000000;
+}
+
+.QSlider::groove:horizontal {
+    border: 1px solid #262626;
+    height: 8px;
+    background: #393939;
+    margin: 0 12px;
+}
+
+.QSlider::handle:horizontal {
+    background: rgb(124, 18, 159);
+    border: 1px solid black;
+    width: 23px;
+    height: 100px;
+    margin: -24px -12px;
+}</string>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -122,7 +179,26 @@
    <item row="2" column="1">
     <widget class="QSlider" name="driver">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">.QSlider {
+    min-height: 55px;
+    max-height: 55px;
+    background: #000000;
+}
+
+.QSlider::groove:horizontal {
+    border: 1px solid #262626;
+    height: 8px;
+    background: #393939;
+    margin: 0 12px;
+}
+
+.QSlider::handle:horizontal {
+    background: rgb(124, 18, 159);
+    border: 1px solid black;
+    width: 23px;
+    height: 100px;
+    margin: -24px -12px;
+}</string>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -153,7 +229,26 @@
    <item row="6" column="1">
     <widget class="QSlider" name="teamwork">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">.QSlider {
+    min-height: 55px;
+    max-height: 55px;
+    background: #000000;
+}
+
+.QSlider::groove:horizontal {
+    border: 1px solid #262626;
+    height: 8px;
+    background: #393939;
+    margin: 0 12px;
+}
+
+.QSlider::handle:horizontal {
+    background: rgb(124, 18, 159);
+    border: 1px solid black;
+    width: 23px;
+    height: 100px;
+    margin: -24px -12px;
+}</string>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

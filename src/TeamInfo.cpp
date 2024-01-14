@@ -48,9 +48,7 @@ void TeamInfo::setTeam() {
     Match match;
     try {
         match = m_matchData.schedule().getMatch(matchNumber, level);
-        qCritical() << "Match good :)" << matchNumber << (int) station << (int) level;
     } catch (std::exception &e) {
-        qCritical() << "Match bad :(" << matchNumber << (int) station << (int) level;
         return;
     }
 
@@ -75,9 +73,7 @@ void TeamInfo::setStation() {
     Match match;
     try {
         match = m_matchData.schedule().getMatch(matchNumber, level);
-        qCritical() << "Match good :(" << matchNumber << team << (int) level;
     } catch (std::exception &e) {
-        qCritical() << "Match bad :(" << matchNumber << team << (int) level;
         return;
     }
 

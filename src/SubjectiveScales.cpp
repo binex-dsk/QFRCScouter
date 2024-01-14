@@ -13,6 +13,14 @@ SubjectiveScales::~SubjectiveScales()
     delete ui;
 }
 
+void SubjectiveScales::clear() {
+    ui->driver->setValue(0);
+    ui->defense->setValue(0);
+    ui->speed->setValue(0);
+    ui->tippiness->setValue(0);
+    ui->teamwork->setValue(0);
+}
+
 int SubjectiveScales::driver() {
     return ui->driver->value();
 }

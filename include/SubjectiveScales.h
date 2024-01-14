@@ -21,6 +21,7 @@ public:
     int tippiness();
     int teamwork();
 
+    void clear();
 private:
     Ui::SubjectiveScales *ui;
 };

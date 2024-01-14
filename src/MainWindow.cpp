@@ -40,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
         stackedWidget->setCurrentWidget(welcome);
         teleScouting->clear();
         autoScouting->clear();
+        notes->clear();
+        scales->clear();
     });
 }
 
