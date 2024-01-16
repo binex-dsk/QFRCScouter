@@ -58,7 +58,10 @@ if(WIN32)
 endif()
 
 if(ANDROID)
-    set(QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAK_CURRENT_SOURCE_DIR}/android)
+    set(QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
+    # set_property(TARGET QFRCScouter APPEND PROPERTY
+    #     QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android
+    # )
 
     set(ANDROID_GUI ON)
     set(MANIFEST_FILE ${CMAKE_CURRENT_SOURCE_DIR}/android/AndroidManifest.xml)
@@ -86,6 +89,7 @@ qt_add_executable(QFRCScouter
     ${QRCODE_SOURCES}
     ${PROJECT_SOURCES}
     Schedule.qrc
+
 )
 
 target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
