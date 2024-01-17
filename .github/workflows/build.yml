@@ -144,13 +144,6 @@ jobs:
         mv ${{ env.BUILD_DIR }}/QFRCScouter.html ${{ env.BUILD_DIR }}/index.html
         tar --owner root --group root -czf QFRCScouter-WASM.tar.gz ${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
 
-    - name: Install Android Tools
-      if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Release'
-      uses: maxim-lobanov/setup-android-tools@v1
-      with:
-        packages: |
-          platforms;android-29
-
     - name: Sign APK (Android)
       if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Release'
       uses: r0adkll/sign-android-release@v1
@@ -166,6 +159,8 @@ jobs:
         keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
         # wee woo
         keyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+      env:
+        BUILD_TOOLS_VERSION: "34.0.0"
 
     - name: Package AppImage (Linux)
       if: runner.os == 'Linux' && matrix.qt_arch == 'gcc_64'
