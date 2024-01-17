@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>480</height>
+    <height>900</height>
    </rect>
   </property>
   <property name="font">
    <font>
     <family>Noto Sans</family>
-    <pointsize>14</pointsize>
+    <pointsize>18</pointsize>
     <bold>false</bold>
    </font>
   </property>
@@ -51,31 +51,33 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>1</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+    <widget class="QLabel" name="label_3">
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>16</pointsize>
+       <pointsize>18</pointsize>
        <bold>false</bold>
       </font>
      </property>
      <property name="text">
-      <string>Enter match info here.</string>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
+      <string>Match Number:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSpinBox" name="matchNumber">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>18</pointsize>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="maximum">
+      <number>999</number>
      </property>
     </widget>
    </item>
@@ -90,7 +92,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>18</pointsize>
        <bold>false</bold>
       </font>
      </property>
@@ -119,7 +121,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>18</pointsize>
        <bold>false</bold>
       </font>
      </property>
@@ -132,59 +134,133 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_3">
+    <widget class="QGroupBox" name="groupBox">
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>18</pointsize>
        <bold>false</bold>
       </font>
      </property>
-     <property name="text">
-      <string>Match Number:</string>
+     <property name="title">
+      <string>Competition Level:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QRadioButton" name="quals">
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>14</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Quals</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="semis">
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>14</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Semifinals</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="finals">
+        <property name="font">
+         <font>
+          <family>Noto Sans</family>
+          <pointsize>14</pointsize>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Finals</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="matchNumber">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>20</pointsize>
-       <bold>false</bold>
-      </font>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_4">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>20</pointsize>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Event Code (e.g. OHMV)</string>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Alliance Station:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="eventCode">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>20</pointsize>
-       <bold>false</bold>
-      </font>
+     <property name="checkable">
+      <bool>false</bool>
      </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="red1">
+        <property name="text">
+         <string>Red 1</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="blue1">
+        <property name="text">
+         <string>Blue 1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="red2">
+        <property name="text">
+         <string>Red 2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QRadioButton" name="blue2">
+        <property name="text">
+         <string>Blue 2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="red3">
+        <property name="text">
+         <string>Red 3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QRadioButton" name="blue3">
+        <property name="text">
+         <string>Blue 3</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -203,5 +279,186 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>quals</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>finals</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>226</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>matchNumber</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>515</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>teamNumber</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setStation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>602</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>semis</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>blue1</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>287</x>
+     <y>328</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>blue2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>287</x>
+     <y>373</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>blue3</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>287</x>
+     <y>418</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>red1</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>328</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>red2</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>373</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>red3</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>TeamInfo</receiver>
+   <slot>setTeam()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>418</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>setStation()</slot>
+  <slot>setTeam()</slot>
+ </slots>
 </ui>

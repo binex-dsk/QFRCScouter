@@ -13,6 +13,9 @@ Notes::~Notes()
     delete ui;
 }
 
+void Notes::clear() {
+    ui->notes->clear();
+}
 QString Notes::notes() {
     return ui->notes->toPlainText();
 }

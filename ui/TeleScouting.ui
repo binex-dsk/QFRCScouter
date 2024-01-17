@@ -25,7 +25,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>40</pointsize>
+       <pointsize>32</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -48,7 +48,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -67,7 +67,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>16</pointsize>
       </font>
      </property>
     </widget>
@@ -77,7 +77,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -96,65 +96,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
-      </font>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_4">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>20</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Dropped Amp Pieces</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="BetterSpinBox" name="droppedAmpPieces">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>20</pointsize>
-      </font>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="label_5">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>20</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Dropped Speaker Pieces</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="BetterSpinBox" name="droppedSpeakerPieces">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>16</pointsize>
       </font>
      </property>
     </widget>
@@ -164,7 +106,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
@@ -183,7 +125,7 @@
      <property name="font">
       <font>
        <family>Noto Sans</family>
-       <pointsize>20</pointsize>
+       <pointsize>16</pointsize>
       </font>
      </property>
     </widget>
@@ -193,7 +135,7 @@
      <property name="font">
       <font>
        <family>Sans Serif</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
@@ -218,7 +160,7 @@
      <property name="font">
       <font>
        <family>Sans Serif</family>
-       <pointsize>20</pointsize>
+       <pointsize>14</pointsize>
       </font>
      </property>
      <property name="layoutDirection">
@@ -228,7 +170,32 @@
       <string notr="true">QCheckBox::indicator:unchecked { width: 30px; height: 30px; } QCheckBox::indicator:checked { width: 30px; height: 30px; }</string>
      </property>
      <property name="text">
-      <string>Defense? (notes on next page)</string>
+      <string>Played Defense?</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="defended">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QCheckBox::indicator:unchecked { width: 30px; height: 30px; } QCheckBox::indicator:checked { width: 30px; height: 30px; }</string>
+     </property>
+     <property name="text">
+      <string>Defended?</string>
      </property>
      <property name="iconSize">
       <size>
@@ -240,13 +207,26 @@
    </item>
    <item>
     <widget class="QLabel" name="label_9">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Spotlights Hit</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="BetterSpinBox" name="spotlights"/>
+    <widget class="BetterSpinBox" name="spotlights">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

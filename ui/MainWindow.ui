@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>QFRCScouter</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -89,6 +89,7 @@
        </sizepolicy>
       </property>
       <widget class="WelcomePage" name="welcome"/>
+      <widget class="SubjectiveScales" name="scales"/>
       <widget class="Notes" name="notes"/>
       <widget class="QRCode" name="qrcode"/>
       <widget class="TeamInfo" name="teamInfo"/>
@@ -134,6 +135,12 @@
    <class>Notes</class>
    <extends>QWidget</extends>
    <header>Notes.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SubjectiveScales</class>
+   <extends>QWidget</extends>
+   <header>SubjectiveScales.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

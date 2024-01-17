@@ -15,6 +15,7 @@ public:
     explicit Notes(QWidget *parent = nullptr);
     ~Notes();
 
+    void clear();
     QString notes();
 
 private:
