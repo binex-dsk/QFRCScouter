@@ -14,43 +14,43 @@ find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Svg)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Svg)
 
 set(QRCODE_SOURCES
-        Qt-QrCodeGenerator/src/QrCodeGenerator.cpp
-        Qt-QrCodeGenerator/src/QrCodeGenerator.h
-        Qt-QrCodeGenerator/src/qrcodegen/qrcodegen.cpp
-        Qt-QrCodeGenerator/src/qrcodegen/qrcodegen.h)
+    Qt-QrCodeGenerator/src/QrCodeGenerator.cpp
+    Qt-QrCodeGenerator/src/QrCodeGenerator.h
+    Qt-QrCodeGenerator/src/qrcodegen/qrcodegen.cpp
+    Qt-QrCodeGenerator/src/qrcodegen/qrcodegen.h)
 
 set(PROJECT_SOURCES
-        src/main.cpp
-        src/MainWindow.cpp
+    src/main.cpp
+    src/MainWindow.cpp
 
-        src/WelcomePage.cpp
-        src/TeamInfo.cpp
-        src/AutoScouting.cpp
+    src/WelcomePage.cpp
+    src/TeamInfo.cpp
+    src/AutoScouting.cpp
 
-        # ================== #
-        include/MainWindow.h
+    # ================== #
+    include/MainWindow.h
 
-        include/WelcomePage.h
-        include/TeamInfo.h
-        include/AutoScouting.h
+    include/WelcomePage.h
+    include/TeamInfo.h
+    include/AutoScouting.h
 
-        # ================== #
-        ui/MainWindow.ui
+    # ================== #
+    ui/MainWindow.ui
 
-        ui/WelcomePage.ui
-        ui/TeamInfo.ui
-        ui/AutoScouting.ui
+    ui/WelcomePage.ui
+    ui/TeamInfo.ui
+    ui/AutoScouting.ui
 
-        include/TeleScouting.h src/TeleScouting.cpp ui/TeleScouting.ui
-        include/QRCode.h src/QRCode.cpp ui/QRCode.ui
-        include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
-        include/Notes.h src/Notes.cpp ui/Notes.ui
-        include/SubjectiveScales.h src/SubjectiveScales.cpp ui/SubjectiveScales.ui
+    include/TeleScouting.h src/TeleScouting.cpp ui/TeleScouting.ui
+    include/QRCode.h src/QRCode.cpp ui/QRCode.ui
+    include/BetterSpinBox.h src/BetterSpinBox.cpp ui/BetterSpinBox.ui
+    include/Notes.h src/Notes.cpp ui/Notes.ui
+    include/SubjectiveScales.h src/SubjectiveScales.cpp ui/SubjectiveScales.ui
 
-        tba/Schedule.h tba/Schedule.cpp
-        tba/Match.h tba/Match.cpp
+    tba/Schedule.h tba/Schedule.cpp
+    tba/Match.h tba/Match.cpp
 
-        include/MatchData.h src/MatchData.cpp
+    include/MatchData.h src/MatchData.cpp
 )
 
 if(WIN32)
@@ -58,11 +58,6 @@ if(WIN32)
 endif()
 
 if(ANDROID)
-    set(QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
-    # set_property(TARGET QFRCScouter APPEND PROPERTY
-    #     QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android
-    # )
-
     set(ANDROID_GUI ON)
     set(MANIFEST_FILE ${CMAKE_CURRENT_SOURCE_DIR}/android/AndroidManifest.xml)
 endif()
@@ -89,7 +84,6 @@ qt_add_executable(QFRCScouter
     ${QRCODE_SOURCES}
     ${PROJECT_SOURCES}
     Schedule.qrc
-
 )
 
 target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
@@ -98,7 +92,7 @@ target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fieed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.QFRCScouter)
+    set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.QFRCScouter)
 endif()
 set_target_properties(QFRCScouter PROPERTIES
     ${BUNDLE_ID_OPTION}
@@ -122,6 +116,12 @@ target_include_directories(QFRCScouter PRIVATE Qt-QrCodeGenerator/src)
 if (EMSCRIPTEN)
     target_compile_options(QFRCScouter PRIVATE "-sNO_DISABLE_EXCEPTION_CATCHING")
     target_link_options(QFRCScouter PRIVATE "-sNO_DISABLE_EXCEPTION_CATCHING")
+endif()
+
+if (ANDROID)
+    set_target_properties(QFRCScouter PROPERTIES
+        QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_SOURCE_DIR}/android
+        COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS} MOBILE")
 endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
