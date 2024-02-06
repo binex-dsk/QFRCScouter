@@ -15,7 +15,14 @@ public:
 
     QString serializeData();
 
+public slots:
+    void next();
+    void back();
+    void backToStart();
+
 private:
     int currentIdx = 0;
+
+    void keyReleaseEvent(QKeyEvent *event) override;
 };
 #endif // MAINWINDOW_H
