@@ -130,6 +130,9 @@
    <extends>QWidget</extends>
    <header>QRCode.h</header>
    <container>1</container>
+   <slots>
+    <signal>backButtonPressed()</signal>
+   </slots>
   </customwidget>
   <customwidget>
    <class>Notes</class>
@@ -145,5 +148,43 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>backButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>back()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>347</x>
+     <y>443</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>249</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nextButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>next()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>444</x>
+     <y>443</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>249</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>next()</slot>
+  <slot>back()</slot>
+  <slot>backToStart()</slot>
+ </slots>
 </ui>
