@@ -51,7 +51,8 @@
       </font>
      </property>
      <property name="text">
-      <string>Welcome to QFRCScouter! Hit the &quot;Next&quot; button to begin scouting.</string>
+      <string>Colloquially &quot;Nickbotics.io&quot;
+Welcome to QFRCScouter! Hit the &quot;Next&quot; button to begin scouting.</string>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
