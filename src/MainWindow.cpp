@@ -47,10 +47,8 @@ QString MainWindow::serializeData() {
     tsv << QString::number(scales->driver());
     tsv << QString::number(scales->defense());
     tsv << QString::number(scales->speed());
-    tsv << QString::number(scales->tippiness());
-    tsv << QString::number(scales->teamwork());
 
-    tsv << notes->notes().replace('\n', "; ");
+    tsv << notes->notes();
 
     return tsv.join("\t");
 }

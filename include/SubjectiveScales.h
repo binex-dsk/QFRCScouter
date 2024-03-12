@@ -18,8 +18,6 @@ public:
     int driver();
     int defense();
     int speed();
-    int tippiness();
-    int teamwork();
 
     void clear();
 private:

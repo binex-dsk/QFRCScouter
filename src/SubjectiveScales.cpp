@@ -17,8 +17,6 @@ void SubjectiveScales::clear() {
     ui->driver->setValue(0);
     ui->defense->setValue(0);
     ui->speed->setValue(0);
-    ui->tippiness->setValue(0);
-    ui->teamwork->setValue(0);
 }
 
 int SubjectiveScales::driver() {
@@ -31,12 +29,4 @@ int SubjectiveScales::defense() {
 
 int SubjectiveScales::speed() {
     return ui->speed->value();
-}
-
-int SubjectiveScales::tippiness() {
-    return ui->tippiness->value();
-}
-
-int SubjectiveScales::teamwork() {
-    return ui->teamwork->value();
 }

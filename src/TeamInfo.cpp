@@ -37,9 +37,7 @@ void TeamInfo::setTeam() {
     CompLevel level;
     AllianceStation station;
 
-    if (ui->finals->isChecked()) level = CompLevel::Finals;
-    else if (ui->semis->isChecked()) level = CompLevel::Semifinals;
-    else level = CompLevel::Quals;
+    level = CompLevel::Quals;
 
     QMapIterator iter(m_buttonMap);
     while (iter.hasNext()) {
@@ -68,9 +66,7 @@ void TeamInfo::setStation() {
 
     CompLevel level;
 
-    if (ui->finals->isChecked()) level = CompLevel::Finals;
-    else if (ui->semis->isChecked()) level = CompLevel::Semifinals;
-    else level = CompLevel::Quals;
+    level = CompLevel::Quals;
 
     std::optional<Match> match;
     match = m_matchData.schedule().getMatch(matchNumber, level);

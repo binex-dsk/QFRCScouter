@@ -134,76 +134,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>18</pointsize>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="title">
-      <string>Competition Level:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="checkable">
-      <bool>false</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QRadioButton" name="quals">
-        <property name="font">
-         <font>
-          <family>Noto Sans</family>
-          <pointsize>14</pointsize>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Quals</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="semis">
-        <property name="font">
-         <font>
-          <family>Noto Sans</family>
-          <pointsize>14</pointsize>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Semifinals</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="finals">
-        <property name="font">
-         <font>
-          <family>Noto Sans</family>
-          <pointsize>14</pointsize>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Finals</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
       <string>Alliance Station:</string>
@@ -281,38 +211,6 @@
  <resources/>
  <connections>
   <connection>
-   <sender>quals</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>TeamInfo</receiver>
-   <slot>setTeam()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>239</x>
-     <y>150</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>239</x>
-     <y>449</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>finals</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>TeamInfo</receiver>
-   <slot>setTeam()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>239</x>
-     <y>226</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>239</x>
-     <y>449</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>matchNumber</sender>
    <signal>valueChanged(int)</signal>
    <receiver>TeamInfo</receiver>
@@ -337,22 +235,6 @@
     <hint type="sourcelabel">
      <x>239</x>
      <y>602</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>239</x>
-     <y>449</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>semis</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>TeamInfo</receiver>
-   <slot>setTeam()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>239</x>
-     <y>188</y>
     </hint>
     <hint type="destinationlabel">
      <x>239</x>

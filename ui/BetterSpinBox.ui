@@ -21,16 +21,16 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QPushButton" name="up">
+    <widget class="QPushButton" name="down">
      <property name="text">
-      <string>Up</string>
+      <string>Down</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="down">
+    <widget class="QPushButton" name="up">
      <property name="text">
-      <string>Down</string>
+      <string>Up</string>
      </property>
     </widget>
    </item>
