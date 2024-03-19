@@ -24,7 +24,6 @@ public:
     int speakerPieces();
 
     int trapPieces();
-    int spotlights();
     bool defense();
     bool defended();
     bool climb();

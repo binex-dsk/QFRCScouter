@@ -38,6 +38,7 @@ QString MainWindow::serializeData() {
     tsv << QString::number(autoScouting->speakerPieces());
 
     tsv << QString::number(autoScouting->aStop());
+    tsv << QString::number(autoScouting->neutralZone());
 
     tsv << QString::number(teleScouting->shortAcquire());
     tsv << QString::number(teleScouting->longAcquire());
@@ -46,7 +47,6 @@ QString MainWindow::serializeData() {
     tsv << QString::number(teleScouting->speakerPieces());
     tsv << QString::number(teleScouting->trapPieces());
 
-    tsv << QString::number(teleScouting->spotlights());
     tsv << QString::number(teleScouting->climb());
     tsv << QString::number(teleScouting->defense());
     tsv << QString::number(teleScouting->defended());

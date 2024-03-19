@@ -25,6 +25,7 @@ public:
 
     bool mobility();
     bool aStop();
+    bool neutralZone();
 
 private:
     Ui::AutoScouting *ui;

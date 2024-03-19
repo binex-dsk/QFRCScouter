@@ -43,3 +43,7 @@ bool AutoScouting::mobility() {
 bool AutoScouting::aStop() {
     return ui->stopped->isChecked();
 }
+
+bool AutoScouting::neutralZone() {
+    return ui->neutralZone->isChecked();
+}
