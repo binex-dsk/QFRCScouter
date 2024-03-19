@@ -155,7 +155,11 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QRadioButton::indicator {
+         <string notr="true">QRadioButton {
+color: red;
+}
+
+QRadioButton::indicator {
 color: white;
 	color: purple;
 	// border: 1px solid white;
@@ -195,7 +199,11 @@ color: white;
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QRadioButton::indicator {
+         <string notr="true">QRadioButton {
+color: rgb(0, 170, 255);
+}
+
+QRadioButton::indicator {
 color: white;
 	color: purple;
 	// border: 1px solid white;
@@ -232,7 +240,11 @@ color: white;
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QRadioButton::indicator {
+         <string notr="true">QRadioButton {
+color: red;
+}
+
+QRadioButton::indicator {
 color: white;
 	color: purple;
 	// border: 1px solid white;
@@ -269,7 +281,11 @@ color: white;
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QRadioButton::indicator {
+         <string notr="true">QRadioButton {
+color: rgb(0, 170, 255);
+}
+
+QRadioButton::indicator {
 color: white;
 	color: purple;
 	// border: 1px solid white;
@@ -306,7 +322,11 @@ color: white;
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QRadioButton::indicator {
+         <string notr="true">QRadioButton {
+color: red;
+}
+
+QRadioButton::indicator {
 color: white;
 	color: purple;
 	// border: 1px solid white;
@@ -343,7 +363,11 @@ color: white;
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QRadioButton::indicator {
+         <string notr="true">QRadioButton {
+color: rgb(0, 170, 255);
+}
+
+QRadioButton::indicator {
 color: white;
 	color: purple;
 	// border: 1px solid white;
