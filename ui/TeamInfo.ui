@@ -147,6 +147,18 @@
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
        <widget class="QRadioButton" name="red1">
+        <property name="styleSheet">
+         <string notr="true">QRadioButton::indicator {
+	color: purple;
+	// border: 1px solid white;
+	width: 120px;
+	height: 20px;
+}
+
+QRadioButton::indicator::checked {
+	background-color: purple;
+}</string>
+        </property>
         <property name="text">
          <string>Red 1</string>
         </property>
@@ -157,6 +169,18 @@
       </item>
       <item row="0" column="1">
        <widget class="QRadioButton" name="blue1">
+        <property name="styleSheet">
+         <string notr="true">QRadioButton::indicator {
+	color: purple;
+	// border: 1px solid white;
+	width: 120px;
+	height: 20px;
+}
+
+QRadioButton::indicator::checked {
+	background-color: purple;
+}</string>
+        </property>
         <property name="text">
          <string>Blue 1</string>
         </property>
@@ -164,6 +188,18 @@
       </item>
       <item row="1" column="0">
        <widget class="QRadioButton" name="red2">
+        <property name="styleSheet">
+         <string notr="true">QRadioButton::indicator {
+	color: purple;
+	// border: 1px solid white;
+	width: 120px;
+	height: 20px;
+}
+
+QRadioButton::indicator::checked {
+	background-color: purple;
+}</string>
+        </property>
         <property name="text">
          <string>Red 2</string>
         </property>
@@ -171,6 +207,18 @@
       </item>
       <item row="1" column="1">
        <widget class="QRadioButton" name="blue2">
+        <property name="styleSheet">
+         <string notr="true">QRadioButton::indicator {
+	color: purple;
+	// border: 1px solid white;
+	width: 120px;
+	height: 20px;
+}
+
+QRadioButton::indicator::checked {
+	background-color: purple;
+}</string>
+        </property>
         <property name="text">
          <string>Blue 2</string>
         </property>
@@ -178,6 +226,18 @@
       </item>
       <item row="2" column="0">
        <widget class="QRadioButton" name="red3">
+        <property name="styleSheet">
+         <string notr="true">QRadioButton::indicator {
+	color: purple;
+	// border: 1px solid white;
+	width: 120px;
+	height: 20px;
+}
+
+QRadioButton::indicator::checked {
+	background-color: purple;
+}</string>
+        </property>
         <property name="text">
          <string>Red 3</string>
         </property>
@@ -185,6 +245,18 @@
       </item>
       <item row="2" column="1">
        <widget class="QRadioButton" name="blue3">
+        <property name="styleSheet">
+         <string notr="true">QRadioButton::indicator {
+	color: purple;
+	// border: 1px solid white;
+	width: 120px;
+	height: 20px;
+}
+
+QRadioButton::indicator::checked {
+	background-color: purple;
+}</string>
+        </property>
         <property name="text">
          <string>Blue 3</string>
         </property>
