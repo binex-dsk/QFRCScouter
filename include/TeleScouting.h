@@ -17,8 +17,12 @@ public:
 
     void clear();
 
+    int shortAcquire();
+    int longAcquire();
+
     int ampPieces();
     int speakerPieces();
+
     int trapPieces();
     int spotlights();
     bool defense();

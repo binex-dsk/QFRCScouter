@@ -30,10 +30,17 @@ QString MainWindow::serializeData() {
     tsv << QString::number(teamInfo->matchNumber());
 
     tsv << QString::number(autoScouting->mobility());
+
+    tsv << QString::number(autoScouting->wingPieces());
+    tsv << QString::number(autoScouting->neutralPieces());
+
     tsv << QString::number(autoScouting->ampPieces());
     tsv << QString::number(autoScouting->speakerPieces());
-    tsv << QString::number(autoScouting->neutralZone());
+
     tsv << QString::number(autoScouting->aStop());
+
+    tsv << QString::number(teleScouting->shortAcquire());
+    tsv << QString::number(teleScouting->longAcquire());
 
     tsv << QString::number(teleScouting->ampPieces());
     tsv << QString::number(teleScouting->speakerPieces());

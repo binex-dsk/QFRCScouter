@@ -17,10 +17,13 @@ public:
 
     void clear();
 
+    int wingPieces();
+    int neutralPieces();
+
     int ampPieces();
     int speakerPieces();
+
     bool mobility();
-    bool neutralZone();
     bool aStop();
 
 private:

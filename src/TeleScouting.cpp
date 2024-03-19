@@ -24,6 +24,14 @@ void TeleScouting::clear() {
     ui->climb->setChecked(false);
 }
 
+int TeleScouting::shortAcquire() {
+    return ui->shortAcquire->value();
+}
+
+int TeleScouting::longAcquire() {
+    return ui->longAcquire->value();
+}
+
 int TeleScouting::ampPieces() {
     return ui->ampPieces->value();
 }

@@ -17,8 +17,15 @@ void AutoScouting::clear() {
     ui->ampPieces->setValue(0);
     ui->speakerPieces->setValue(0);
     ui->mobility->setChecked(false);
-    ui->neutral->setChecked(false);
     ui->stopped->setChecked(false);
+}
+
+int AutoScouting::wingPieces() {
+    return ui->wing->value();
+}
+
+int AutoScouting::neutralPieces() {
+    return ui->neutral->value();
 }
 
 int AutoScouting::ampPieces() {
@@ -31,10 +38,6 @@ int AutoScouting::speakerPieces() {
 
 bool AutoScouting::mobility() {
     return ui->mobility->isChecked();
-}
-
-bool AutoScouting::neutralZone() {
-    return ui->neutral->isChecked();
 }
 
 bool AutoScouting::aStop() {
