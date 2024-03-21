@@ -9,6 +9,7 @@ BetterSlider::BetterSlider(QWidget *parent)
 }
 
 void BetterSlider::setValue(int value) {
+    ui->spinBox->setValue(value);
     ui->slider->setValue(value);
 }
 

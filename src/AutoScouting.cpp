@@ -16,6 +16,11 @@ AutoScouting::~AutoScouting()
 void AutoScouting::clear() {
     ui->ampPieces->setValue(0);
     ui->speakerPieces->setValue(0);
+
+    ui->wing->setValue(0.);
+    ui->neutral->setValue(0.);
+
+    ui->neutralZone->setChecked(false);
     ui->mobility->setChecked(false);
     ui->stopped->setChecked(false);
 }
