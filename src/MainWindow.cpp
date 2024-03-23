@@ -47,6 +47,8 @@ QString MainWindow::serializeData() {
     tsv << QString::number(teleScouting->speakerPieces());
     tsv << QString::number(teleScouting->trapPieces());
 
+    tsv << QString::number(teleScouting->missedNotes());
+
     tsv << QString::number(teleScouting->climb());
     tsv << QString::number(teleScouting->defense());
     tsv << QString::number(teleScouting->defended());

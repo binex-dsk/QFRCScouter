@@ -17,8 +17,10 @@ void TeleScouting::clear() {
     ui->ampPieces->setValue(0);
     ui->speakerPieces->setValue(0);
 
-    ui->longAcquire->setValue(0.);
-    ui->shortAcquire->setValue(0.);
+    ui->longAcquire->setValue(0);
+    ui->shortAcquire->setValue(0);
+
+    ui->missedNotes->setValue(0);
 
     ui->trapPiece->setChecked(false);
     ui->defense->setChecked(false);
@@ -44,6 +46,10 @@ int TeleScouting::speakerPieces() {
 
 int TeleScouting::trapPieces() {
     return ui->trapPiece->isChecked();
+}
+
+int TeleScouting::missedNotes() {
+    return ui->missedNotes->value();
 }
 
 bool TeleScouting::defense() {
