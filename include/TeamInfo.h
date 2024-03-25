@@ -26,6 +26,8 @@ public:
     int teamNumber();
     int matchNumber();
 
+    QString initials();
+
 public slots:
     void setTeam();
     void setStation();

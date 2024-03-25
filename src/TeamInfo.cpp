@@ -30,6 +30,10 @@ int TeamInfo::matchNumber() {
     return ui->matchNumber->value();
 }
 
+QString TeamInfo::initials() {
+    return ui->initials->text();
+}
+
 void TeamInfo::setTeam() {
     int matchNumber = ui->matchNumber->value();
     if (matchNumber == 0) return;

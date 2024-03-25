@@ -29,6 +29,8 @@ QString MainWindow::serializeData() {
     tsv << QString::number(teamInfo->teamNumber());
     tsv << QString::number(teamInfo->matchNumber());
 
+    tsv << teamInfo->initials();
+
     tsv << QString::number(autoScouting->mobility());
 
     tsv << QString::number(autoScouting->wingPieces());

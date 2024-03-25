@@ -20,6 +20,8 @@ public:
     int shortAcquire();
     int longAcquire();
 
+    int missedNotes();
+
     int ampPieces();
     int speakerPieces();
 
