@@ -44,6 +44,7 @@ QString MainWindow::serializeData() {
 
     tsv << QString::number(teleScouting->shortAcquire());
     tsv << QString::number(teleScouting->longAcquire());
+    tsv << QString::number(teleScouting->shuttled());
 
     tsv << QString::number(teleScouting->ampPieces());
     tsv << QString::number(teleScouting->speakerPieces());
@@ -58,6 +59,7 @@ QString MainWindow::serializeData() {
     tsv << QString::number(scales->driver());
     tsv << QString::number(scales->defense());
     tsv << QString::number(scales->speed());
+    tsv << QString::number(scales->shuttling());
 
     tsv << notes->notes();
 

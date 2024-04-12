@@ -44,6 +44,10 @@ int TeleScouting::speakerPieces() {
     return ui->speakerPieces->value();
 }
 
+int TeleScouting::shuttled() {
+    return ui->shuttled->value();
+}
+
 int TeleScouting::trapPieces() {
     return ui->trapPiece->isChecked();
 }

@@ -84,7 +84,7 @@ qt_add_executable(QFRCScouter
     ${QRCODE_SOURCES}
     ${PROJECT_SOURCES}
     Schedule.qrc
-    include/BetterSlider.h src/BetterSlider.cpp ui/BetterSlider.ui
+    include/Scale.h src/Scale.cpp ui/Scale.ui
 )
 
 target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)

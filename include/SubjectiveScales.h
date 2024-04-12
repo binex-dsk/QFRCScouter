@@ -18,6 +18,7 @@ public:
     int driver();
     int defense();
     int speed();
+    int shuttling();
 
     void clear();
 private:

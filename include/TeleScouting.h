@@ -24,6 +24,7 @@ public:
 
     int ampPieces();
     int speakerPieces();
+    int shuttled();
 
     int trapPieces();
     bool defense();
