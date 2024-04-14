@@ -19,6 +19,7 @@ void TeleScouting::clear() {
 
     ui->longAcquire->setValue(0);
     ui->shortAcquire->setValue(0);
+    ui->shuttled->setValue(0);
 
     ui->missedNotes->setValue(0);
 
