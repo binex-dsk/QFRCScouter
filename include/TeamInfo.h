@@ -26,9 +26,16 @@ public:
     int teamNumber();
     int matchNumber();
 
+    QString initials();
+
 public slots:
     void setTeam();
     void setStation();
+
+    void downloadSchedule();
+
+signals:
+    void reloadSchedule();
 
 private:
     Ui::TeamInfo *ui;

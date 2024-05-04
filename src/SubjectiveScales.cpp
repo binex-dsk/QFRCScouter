@@ -14,9 +14,10 @@ SubjectiveScales::~SubjectiveScales()
 }
 
 void SubjectiveScales::clear() {
-    ui->driver->setValue(0);
-    ui->defense->setValue(0);
-    ui->speed->setValue(0);
+    ui->driver->reset();
+    ui->defense->reset();
+    ui->speed->reset();
+    ui->shuttling->reset();
 }
 
 int SubjectiveScales::driver() {
@@ -29,4 +30,8 @@ int SubjectiveScales::defense() {
 
 int SubjectiveScales::speed() {
     return ui->speed->value();
+}
+
+int SubjectiveScales::shuttling() {
+    return ui->shuttling->value();
 }

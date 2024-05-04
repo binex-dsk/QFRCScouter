@@ -17,10 +17,16 @@ public:
 
     void clear();
 
+    int shortAcquire();
+    int longAcquire();
+
+    int missedNotes();
+
     int ampPieces();
     int speakerPieces();
+    int shuttled();
+
     int trapPieces();
-    int spotlights();
     bool defense();
     bool defended();
     bool climb();

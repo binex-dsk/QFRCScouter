@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>640</height>
+    <width>788</width>
+    <height>488</height>
    </rect>
   </property>
   <property name="font">
@@ -19,79 +19,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="4" column="1">
-    <widget class="QSlider" name="speed">
-     <property name="styleSheet">
-      <string notr="true">.QSlider {
-    min-height: 55px;
-    max-height: 55px;
-    background: #000000;
-}
-
-.QSlider::groove:horizontal {
-    border: 1px solid #262626;
-    height: 8px;
-    background: #393939;
-    margin: 0 12px;
-}
-
-.QSlider::handle:horizontal {
-    background: rgb(124, 18, 159);
-    border: 1px solid black;
-    width: 23px;
-    height: 100px;
-    margin: -24px -12px;
-}</string>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QLabel" name="label_2">
-     <property name="font">
-      <font>
-       <family>Noto Sans</family>
-       <pointsize>18</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Rate various aspects of the driver here.</string>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Driver:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Defense Skill:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Speed:</string>
-     </property>
-    </widget>
-   </item>
+  <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="label">
      <property name="font">
@@ -115,65 +43,139 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
-    <widget class="QSlider" name="defense">
-     <property name="styleSheet">
-      <string notr="true">.QSlider {
-    min-height: 55px;
-    max-height: 55px;
-    background: #000000;
-}
-
-.QSlider::groove:horizontal {
-    border: 1px solid #262626;
-    height: 8px;
-    background: #393939;
-    margin: 0 12px;
-}
-
-.QSlider::handle:horizontal {
-    background: rgb(124, 18, 159);
-    border: 1px solid black;
-    width: 23px;
-    height: 100px;
-    margin: -24px -12px;
-}</string>
+   <item row="1" column="0" colspan="2">
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>18</pointsize>
+      </font>
      </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+     <property name="text">
+      <string>Rate various aspects of the driver here.</string>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="margin">
+      <number>0</number>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QSlider" name="driver">
-     <property name="styleSheet">
-      <string notr="true">.QSlider {
-    min-height: 55px;
-    max-height: 55px;
-    background: #000000;
-}
-
-.QSlider::groove:horizontal {
-    border: 1px solid #262626;
-    height: 8px;
-    background: #393939;
-    margin: 0 12px;
-}
-
-.QSlider::handle:horizontal {
-    background: rgb(124, 18, 159);
-    border: 1px solid black;
-    width: 23px;
-    height: 100px;
-    margin: -24px -12px;
-}</string>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Driver:</string>
      </property>
     </widget>
    </item>
-   <item row="5" column="0">
+   <item row="5" column="0" colspan="2">
+    <widget class="QLabel" name="label_6">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>How did the driver do? Did they hit field elements/robots? Did they drive spastically, or smooth? Were they quick to pick up, score, operate?</string>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Defense Skill:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0" colspan="2">
+    <widget class="QLabel" name="label_7">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>If they played defense, how'd they do? Did they shut down other robots?</string>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Speed:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0" colspan="2">
+    <widget class="QLabel" name="label_8">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Generally, how fast were they? Consider scoring, driving, and pickup.</string>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>Shuttling:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="1">
+    <widget class="Scale" name="shuttling" native="true"/>
+   </item>
+   <item row="17" column="0" colspan="2">
+    <widget class="QLabel" name="label_9">
+     <property name="font">
+      <font>
+       <family>Noto Sans</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>If they shuttled, how good was it? Did notes get stolen? Did the notes get put in the corner (good), source (bad), or off the field (really bad)?</string>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="19" column="0" colspan="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -186,8 +188,25 @@
      </property>
     </spacer>
    </item>
+   <item row="11" column="1">
+    <widget class="Scale" name="speed" native="true"/>
+   </item>
+   <item row="7" column="1">
+    <widget class="Scale" name="defense" native="true"/>
+   </item>
+   <item row="3" column="1">
+    <widget class="Scale" name="driver" native="true"/>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Scale</class>
+   <extends>QWidget</extends>
+   <header>Scale.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
