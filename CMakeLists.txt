@@ -10,8 +10,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Svg)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Svg)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Svg Network)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Svg Network)
 
 set(QRCODE_SOURCES
     Qt-QrCodeGenerator/src/QrCodeGenerator.cpp
@@ -64,6 +64,8 @@ endif()
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
 
+option(TBA_AUTH_KEY "TBA authentication key." "")
+
 # Git
 include(GetGitRevisionDescription)
 git_get_exact_tag(Scouter_GIT_TAG)
@@ -83,11 +85,11 @@ qt_add_executable(QFRCScouter
     ${RCS_FILE}
     ${QRCODE_SOURCES}
     ${PROJECT_SOURCES}
-    Schedule.qrc
+
     include/Scale.h src/Scale.cpp ui/Scale.ui
 )
 
-target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
+target_link_libraries(QFRCScouter PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Network)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -113,6 +115,8 @@ install(TARGETS QFRCScouter
 target_include_directories(QFRCScouter PRIVATE include/)
 target_include_directories(QFRCScouter PRIVATE tba/)
 target_include_directories(QFRCScouter PRIVATE Qt-QrCodeGenerator/src)
+
+add_compile_definitions(TBA_AUTH_KEY="${TBA_AUTH_KEY}")
 
 if (EMSCRIPTEN)
     target_compile_options(QFRCScouter PRIVATE "-sNO_DISABLE_EXCEPTION_CATCHING")

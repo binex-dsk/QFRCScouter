@@ -32,6 +32,11 @@ public slots:
     void setTeam();
     void setStation();
 
+    void downloadSchedule();
+
+signals:
+    void reloadSchedule();
+
 private:
     Ui::TeamInfo *ui;
     QMap<AllianceStation, QRadioButton *> m_buttonMap;

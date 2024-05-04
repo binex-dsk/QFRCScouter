@@ -357,7 +357,7 @@
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
         <horstretch>1</horstretch>
-        <verstretch>1</verstretch>
+        <verstretch>2</verstretch>
        </sizepolicy>
       </property>
       <property name="text">
@@ -370,7 +370,7 @@
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
         <horstretch>1</horstretch>
-        <verstretch>1</verstretch>
+        <verstretch>2</verstretch>
        </sizepolicy>
       </property>
       <property name="text">
