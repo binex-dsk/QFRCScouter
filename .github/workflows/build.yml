@@ -33,11 +33,6 @@ jobs:
             qt_arch: android_arm64_v8a
             qt_version: '6.6.0'
 
-          - os: ubuntu-20.04
-            qt_host: linux
-            qt_version: '6.6.0'
-            qt_arch: wasm_singlethread
-
           - os: windows-2022
             qt_host: windows
             qt_version: '6.6.0'
@@ -79,15 +74,6 @@ jobs:
         version: 6.6.0
         aqtversion: ==3.1.*
 
-    - name: Install Qt (WASM)
-      if: matrix.qt_arch == 'wasm_singlethread'
-      uses: jurplel/install-qt-action@v3.3.0
-      with:
-        cache: on
-        version: 6.6.0
-        aqtversion: ==3.1.*
-        arch: ${{ matrix.qt_arch }}
-
     - name: Install Qt (Android)
       if: matrix.qt_target == 'android'
       uses: jurplel/install-qt-action@v3.3.0
@@ -105,13 +91,6 @@ jobs:
         wget "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
         wget "https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-x86_64.AppImage"
         wget "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
-
-    - name: Prepare Emscripten (Linux)
-      if: runner.os == 'Linux' && matrix.qt_arch == 'wasm_singlethread'
-      uses: mymindstorm/setup-emsdk@v13
-      with:
-        # Version to install
-        version: 3.1.37
 
     - name: Configure and Build (Linux)
       if: runner.os == 'Linux'
@@ -137,12 +116,6 @@ jobs:
 
         cd ${{ env.INSTALL_DIR }}
         tar --owner root --group root -czf ../QFRCScouter.tar.gz *
-
-    - name: Package (WASM)
-      if: runner.os == 'Linux' && matrix.qt_arch == 'wasm_singlethread'
-      run: |
-        mv ${{ env.BUILD_DIR }}/QFRCScouter.html ${{ env.BUILD_DIR }}/index.html
-        tar --owner root --group root -czf QFRCScouter-WASM.tar.gz ${{ env.BUILD_DIR }}/*.{js,html,svg,wasm}
 
     - name: Sign APK (Android)
       if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Release'
@@ -205,24 +178,6 @@ jobs:
       # UPLOAD BUILDS
       ##
       #
-    - name: Upload Pages WASM
-      if: matrix.qt_arch == 'wasm_singlethread'
-      uses: actions/upload-pages-artifact@v3.0.0
-      with:
-        path: ${{ env.BUILD_DIR }}
-        retention-days: 14
-
-    - name: Deploy Pages WASM
-      if: matrix.qt_arch == 'wasm_singlethread'
-      uses: actions/deploy-pages@v4.0.2
-
-    - name: Upload WASM (Linux)
-      if: runner.os == 'Linux' && matrix.qt_arch == 'wasm_singlethread'
-      uses: actions/upload-artifact@v3
-      with:
-        name: QFRCScouter-WASM-${{ runner.os }}-Binary-${{ env.VERSION }}-${{ inputs.build_type }}
-        path: QFRCScouter-WASM.tar.gz
-
     - name: Upload Release APK (Linux)
       if: runner.os == 'Linux' && matrix.qt_target == 'android' && inputs.build_type == 'Release'
       uses: actions/upload-artifact@v3
